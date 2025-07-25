@@ -77,7 +77,10 @@ main {
 
 .main-banner {
     max-width: 100%;
-    height: auto;
+    /* Nova linha: Limita a altura máxima do banner */
+    max-height: 250px; /* Você pode ajustar este valor (ex: 180px, 200px, 300px) */
+    width: auto; /* Garante que a largura se ajuste à altura mantendo a proporção */
+    object-fit: cover; /* Recorta a imagem para cobrir a área sem distorcer */
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -87,8 +90,6 @@ main {
     font-size: 1.2em;
     color: #555;
     font-style: italic;
-}
-
 
 .category {
     margin-bottom: 40px;

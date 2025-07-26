@@ -977,7 +977,7 @@ cat << 'EOF' > "$OUTPUT_DIR/index.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1019,7 +1019,7 @@ cat << 'EOF' > "$OUTPUT_DIR/politica_nacional.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1061,7 +1061,7 @@ cat << 'EOF' > "$OUTPUT_DIR/economia_negocios.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1103,7 +1103,7 @@ cat << 'EOF' > "$OUTPUT_DIR/cultura_lazer_sociedade.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1145,7 +1145,7 @@ cat << 'EOF' > "$OUTPUT_DIR/esportes.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1187,7 +1187,7 @@ cat << 'EOF' > "$OUTPUT_DIR/seguranca_meio_ambiente.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1229,7 +1229,7 @@ cat << 'EOF' > "$OUTPUT_DIR/paginas_amarelas.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1264,7 +1264,7 @@ cat << 'EOF' > "$OUTPUT_DIR/criar_noticia.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1299,7 +1299,7 @@ cat << 'EOF' > "$OUTPUT_DIR/publicacao_massa.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -1520,7 +1520,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 

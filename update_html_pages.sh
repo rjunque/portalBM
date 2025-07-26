@@ -45,7 +45,7 @@ generate_html_with_placeholders() {
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -131,7 +131,7 @@ cat << 'EOF' > "$OUTPUT_DIR/criar_noticia.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 
@@ -168,7 +168,7 @@ cat << 'EOF' > "$OUTPUT_DIR/publicacao_massa.html"
     </main>
 
     <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <p>&copy; 2025 PortAL BM. Todos os direitos reservados.</p>
         <div id="footer-nav-placeholder"></div>
     </footer>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Páginas Amarelas - Portal BM</title>
+    <title>Portal BM - Páginas Amarelas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
-    <nav>
+    <nav class="main-nav">
         <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="politica_nacional.html">Política Nacional</a></li>
@@ -26,28 +26,53 @@
         </ul>
     </nav>
 
+    <section class="banner-section">
+        <a href="index.html"> <img src="Banner.jpg" alt="Banner do Portal BM" class="main-banner">
+        </a>
+        <p class="banner-text">Entrevistas e conteúdos especiais nas Páginas Amarelas.</p>
+    </section>
+
     <main>
         <section class="category">
             <h2>Páginas Amarelas</h2>
-
-            <article class="news-item" id="o-pais-dos-incapazes">
-                <h3>O País dos Incapazes?: Artigo de Fernando Schüler sobre a Hipossuficiência</h3>
-                <p><strong>Autor:</strong> Fernando Schüler</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Artigo de Fernando Schüler que questiona a ideia da "hipossuficiência" dos cidadãos brasileiros, onde o Estado assume que o indivíduo é incapaz de tomar decisões por si mesmo. O texto explora como essa mentalidade se manifesta em diversas áreas, como contribuições sindicais compulsórias, gestão do FGTS e restrições à liberdade de expressão, impactando a autonomia individual.</p>
-            </article>
-
             <article class="news-item" id="entrevista-david-ricks">
                 <h3>Entrevista Exclusiva com David Ricks: O "Doutor Mounjaro" e a Luta Contra a Obesidade</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Uma entrevista reveladora com David Ricks, o CEO da Eli Lilly, carinhosamente apelidado de "Doutor Mounjaro". Ele discute os planos ambiciosos da farmacêutica para ir além do tratamento da obesidade, buscando erradicá-la. Ricks também aborda a incessante busca por produtos inovadores, incluindo uma promissora droga para o combate ao Alzheimer, destacando o compromisso da empresa com avanços científicos que transformam vidas.</p>
+                <p>O CEO da Eli Lilly, David Ricks, conhecido como "Doutor Mounjaro", detalha os planos ambiciosos da farmacêutica para erradicar a obesidade e sua busca incessante por medicamentos inovadores, incluindo uma promissora droga para Alzheimer.</p>
+                <p>Na entrevista exclusiva, Ricks discute a importância de abordagens multifacetadas para a obesidade, combinando medicação com mudanças no estilo de vida. Ele também compartilha insights sobre os desafios e as oportunidades no desenvolvimento de novas terapias para doenças crônicas, e a visão da Eli Lilly para o futuro da saúde global.</p>
+                
+                <h4>Principais pontos da entrevista:</h4>
+                <ul>
+                    <li>**Mounjaro e Zepbound:** Ricks enfatiza o impacto dessas drogas no tratamento da obesidade e diabetes tipo 2, destacando que elas são mais do que "medicamentos para emagrecer", mas sim para tratar uma doença crônica complexa.</li>
+                    <li>**Estratégia de Longo Prazo:** A Eli Lilly está comprometida com a pesquisa e desenvolvimento contínuos de novas moléculas para obesidade, com o objetivo de oferecer opções mais variadas e eficazes.</li>
+                    <li>**Pesquisa em Alzheimer:** Embora o foco principal seja obesidade, a empresa tem uma droga promissora em testes para Alzheimer, o que demonstra a amplitude de sua pesquisa farmacêutica. Ricks ressalta a importância de encontrar soluções para doenças neurodegenerativas.</li>
+                    <li>**Acessibilidade e Preço:** A entrevista aborda os desafios de acessibilidade e o custo dos novos medicamentos, e a Eli Lilly está buscando estratégias para tornar as terapias mais amplamente disponíveis.</li>
+                    <li>**Inovação e Futuro:** Ricks expressa otimismo sobre o futuro da medicina e a capacidade da indústria farmacêutica de transformar a vida das pessoas, através da ciência e da inovação contínua.</li>
+                </ul>
+                <p>Esta entrevista oferece uma visão aprofundada da liderança e visão estratégica de David Ricks e da Eli Lilly no combate a algumas das maiores desafios de saúde pública da atualidade.</p>
+            </article>
+            <article class="news-item">
+                <h3>Perfil: Maria Silva, a Influenciadora que Transformou a Jardinagem em Paixão Nacional</h3>
+                <p>Conheça a história de Maria Silva, a influenciadora digital que saiu do anonimato para se tornar a voz da jardinagem no Brasil. Com dicas práticas e um carisma contagiante, ela conquistou milhões de seguidores e transformou a forma como muitos brasileiros veem o cultivo de plantas.</p>
+                <p>Em sua entrevista exclusiva, Maria compartilha sua jornada, desde o primeiro vaso de suculentas até o império digital que construiu. Ela discute a importância da conexão com a natureza, os desafios de ser uma criadora de conteúdo e seus planos futuros para expandir seu alcance e impactar ainda mais vidas.</p>
             </article>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <nav class="footer-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="politica_nacional.html">Política Nacional</a></li>
+                <li><a href="seguranca_meio_ambiente.html">Segurança e Meio Ambiente</a></li>
+                <li><a href="economia_negocios.html">Economia & Negócios</a></li>
+                <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
+                <li><a href="esportes.html">Esportes</a></li>
+                <li><a href="paginas_amarelas.html" class="active">Páginas Amarelas</a></li>
+                <li><a href="criar_noticia.html">Publicar Notícia</a></li>
+                <li><a href="publicacao_massa.html">Publicar Massa</a></li>
+            </ul>
+        </nav>
     </footer>
 </body>
 </html>

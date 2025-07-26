@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal BM - Cultura, Lazer e Sociedade</title>
+    <title>Portal BM - Leia nossas Páginas Amarelas e perfis exclusivos.</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Portal BM</h1>
-        <p>As notícias mais importantes do dia, reunidas em um solo lugar.</p>
+        <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
     <div id="main-nav-placeholder"></div>
@@ -18,13 +18,14 @@
         <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank">
             <img src="Banner.jpg" alt="Banner do Portal BM" class="main-banner">
         </a>
-        <p class="banner-text">Explore as novidades em Cultura, Lazer e Sociedade.</p>
+        <p class="banner-text">Páginas Amarelas</p>
     </section>
 
     <main>
         <section class="category">
-            <h2>Cultura, Lazer e Sociedade</h2>
-            <div id="news-container"></div>
+            <h2>paginas_amarelas.html</h2>
+            <div id="news-container">
+                </div>
         </section>
     </main>
 

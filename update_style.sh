@@ -1,3 +1,12 @@
+#!/bin/bash
+
+# Define o diretório do projeto
+OUTPUT_DIR="portal_bm_project"
+
+echo "Atualizando apenas o arquivo style.css no diretório: $OUTPUT_DIR"
+
+# --- style.css ---
+cat << 'EOF' > "$OUTPUT_DIR/style.css"
 /* style.css */
 
 /* Estilos Globais */
@@ -5,8 +14,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4; /* Fundo cinza claro para o corpo */
-    color: #333; /* Cor de texto padrão */
+    background-color: #f4f4f4;
+    color: #333;
     line-height: 1.6;
 }
 
@@ -19,8 +28,8 @@ body {
 
 /* Estilos de Cabeçalho */
 header {
-    background-color: #007bff; /* Fundo AZUL para o cabeçalho */
-    color: white; /* Texto branco */
+    background-color: #333; /* Fundo escuro para o cabeçalho */
+    color: white;
     padding: 1rem 0;
     text-align: center;
 }
@@ -43,9 +52,6 @@ header p {
     display: flex; /* Para itens lado a lado no desktop */
     justify-content: center;
     flex-wrap: wrap; /* Permite que os itens quebrem a linha se não couberem */
-    background-color: #007bff; /* Fundo AZUL para o menu principal */
-    border-radius: 5px; /* Adicionado para arredondar as bordas do menu */
-    padding: 10px 0; /* Aumentado o padding para melhor visual */
 }
 
 .main-nav ul li {
@@ -63,7 +69,7 @@ header p {
 
 .main-nav ul li a:hover,
 .main-nav ul li a.active {
-    background-color: #0056b3; /* Um azul um pouco mais escuro ao passar o mouse/ativo */
+    background-color: #555; /* Fundo ao passar o mouse ou ativo */
 }
 
 /* Oculta o menu do rodapé por padrão (só aparecerá em mobile) */
@@ -73,8 +79,8 @@ header p {
 
 /* Estilos de Rodapé */
 footer {
-    background-color: #007bff; /* Fundo AZUL para o rodapé */
-    color: white; /* Texto branco */
+    background-color: #333; /* Fundo escuro para o rodapé */
+    color: white;
     text-align: center;
     padding: 1rem 0;
     margin-top: 2rem; /* Espaçamento entre o conteúdo principal e o rodapé */
@@ -89,10 +95,7 @@ footer p {
     list-style: none;
     padding: 0;
     margin: 1rem 0 0;
-    /* Em mobile, este menu será flex-direction: column (definido na media query) */
-    background-color: #007bff; /* Fundo AZUL para o menu do rodapé */
-    border-radius: 5px; /* Adicionado para arredondar as bordas do menu */
-    padding: 10px 0; /* Aumentado o padding para melhor visual */
+    /* No desktop, este menu ficará oculto, então os estilos de flexbox não importam aqui. */
 }
 
 .footer-nav ul li {
@@ -111,7 +114,7 @@ footer p {
 
 .footer-nav ul li a:hover,
 .footer-nav ul li a.active {
-    background-color: #0056b3; /* Um azul um pouco mais escuro ao passar o mouse/ativo */
+    background-color: #555; /* Fundo ao passar o mouse ou ativo */
 }
 
 /* Estilos do Banner */
@@ -395,3 +398,16 @@ main {
         text-align: center;
     }
 }
+EOF
+
+echo "Arquivo style.css atualizado com sucesso em $OUTPUT_DIR/style.css."
+echo ""
+echo "--- Próximos Passos ---"
+echo ""
+echo "1.  Limpe o Cache do Navegador: É essencial fazer um 'Hard Refresh' (Ctrl+Shift+R ou Cmd+Shift+R no Windows/Linux ou Cmd+Shift+R no Mac) no seu navegador para garantir que ele carregue a nova versão do `style.css`."
+echo "2.  Verifique as Páginas: Acesse novamente \`http://localhost:8000/index.html\` (ou a página que estiver testando) e verifique se as cores e a formatação voltaram ao normal."
+echo "3.  Deploy para o GitHub (se já estiver funcionando localmente): Se você estiver usando o GitHub Pages ou outro serviço, lembre-se de adicionar o `style.css` modificado, fazer o commit e dar um push para o seu repositório."
+echo "    \`cd portal_bm_project\`"
+echo "    \`git add style.css\`"
+echo "    \`git commit -m \"Corrige style.css para restaurar cores e formatacao\"\`"
+echo "    \`git push origin main\`"

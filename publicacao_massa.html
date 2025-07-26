@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicação em Massa - Portal BM</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para esta página */
+        #input-block-container, #output-blocks-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        #news-input {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        #generate-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            display: block; /* Para centralizar se necessário ou ocupar largura total */
+            margin: 0 auto;
+        }
+        #generate-button:hover {
+            background-color: #0056b3;
+        }
+        .output-section {
+            margin-top: 30px;
+            border: 1px dashed #0056b3;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #e6f0ff; /* Cor clara para seção de saída */
+        }
+        .output-section h3 {
+            color: #0056b3;
+            margin-top: 0;
+            border-bottom: 1px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .output-code {
+            width: 100%;
+            min-height: 400px; /* Mais altura para ver o código completo */
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f8ff; /* Fundo mais claro para código */
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .copy-button {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .copy-button:hover {
+            background-color: #218838;
+        }
+        .instructions {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #fff3cd; /* Amarelo claro para instruções */
+            border-left: 5px solid #ffc107;
+            border-radius: 4px;
+            color: #856404;
+        }
+        .instructions ol li {
+            margin-bottom: 8px;
+        }
+
+        /* Loading Spinner */
+        #loading-spinner {
+            display: none; /* Hidden by default */
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portal BM</h1>
+        <p>Publicação de Notícias em Massa</p>
+        <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank" rel="noopener noreferrer">
+            <img src="banner.jpg" alt="Banner do Portal BM" class="header-banner">
+        </a>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="politica_nacional.html">Política Nacional</a></li>
+                <li><a href="seguranca_meio_ambiente.html">Segurança e Meio Ambiente</a></li>
+                <li><a href="economia_negocios.html">Economia & Negócios</a></li>
+                <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
+                <li><a href="esportes.html">Esportes</a></li>
+                <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
+                <li><a href="criar_noticia.html" class="menu-oculto">Publicar Notícia (Única)</a></li>
+                <li><a href="publicacao_massa.html" class="active menu-oculto">Publicação em Massa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="category">
+            <h2>Importar Bloco de Notícias</h2>
+            <div class="instructions">
+                <p><strong>Instruções Cruciais:</strong></p>
+                <ol>
+                    <li>Cole abaixo o bloco de texto com TODAS as notícias do dia.</li>
+                    <li>Siga o formato exato para cada notícia:
+                        <pre><code>[SECAO: Nome da Seção]
+Título da Notícia
+Autor da Notícia
+Fonte da Notícia (URL ou Nome)
+Texto completo da Notícia (pode ter várias linhas).
+Uma linha em branco para separar campos.
+Duas linhas em branco para separar notícias.</code></pre>
+                    </li>
+                    <li>O "Nome da Seção" deve ser **exatamente** um dos seguintes: `Politica Nacional`, `Seguranca e Meio Ambiente`, `Economia & Negocios`, `Cultura, Lazer e Sociedade`, `Esportes`, `Páginas Amarelas`.</li>
+                    <li>Este gerador **apenas combina as novas notícias com o template das notícias antigas**. Você ainda precisará **copiar o HTML gerado e colar nos respectivos arquivos HTML do seu site** (<code>.html</code>), substituindo o conteúdo existente da seção.</li>
+                    <li>As imagens não são processadas automaticamente aqui. Adicione a tag <code>&lt;img&gt;</code> manualmente no HTML gerado se precisar.</li>
+                </ol>
+            </div>
+
+            <div id="input-block-container">
+                <label for="news-input">Cole o Bloco de Notícias Aqui:</label>
+                <textarea id="news-input" placeholder="[SECAO: Politica Nacional]..." required></textarea>
+                <button id="generate-button">Gerar Código em Massa</button>
+                <div id="loading-spinner"></div>
+            </div>
+
+            <div id="output-blocks-container">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('generate-button').addEventListener('click', generateMassCode);
+
+        // Map para guardar o template HTML de cada seção
+        // IMPORTANTE: VOCÊ PRECISA ATUALIZAR ESTES TEMPLATES COM O CONTEÚDO ATUAL DOS SEUS ARQUIVOS HTML
+        // Ex: Abra politica_nacional.html, copie todo o conteúdo da <section class="category">Política Nacional</section>
+        // e cole aqui dentro das aspas. Faça isso para TODAS as seções.
+        const sectionTemplates = {
+            'Politica Nacional': `
+            <section class="category">
+                <h2>Política Nacional</h2>
+                <article class="news-item" id="radar-politico-economico">
+                    <h3>Radar: Vistos do STF, Bolsonaro, Ofensiva dos EUA, e Cenário Político-Econômico</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Notas sobre diversos temas do cenário político e econômico, incluindo o cancelamento de vistos de ministros do STF nos EUA, a situação de Jair Bolsonaro, a ofensiva dos EUA contra o Supremo, e outros temas que movimentam o país.</p>
+                </article>
+
+                <article class="news-item" id="aposta-no-confronto">
+                    <h3>Aposta no Confronto: Estratégia de Bolsonaro Contra o STF</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Jair Bolsonaro adota uma estratégia de vitimização e radicalização contra o Supremo Tribunal Federal (STF) em meio ao crescente risco de prisão. Essa postura busca mobilizar sua base de apoio, mas também acirra a tensão institucional no país.</p>
+                </article>
+
+                <article class="news-item" id="retorica-eleitoreira">
+                    <h3>Retórica Eleitoreira: A Postura do Governo Lula Diante das Tarifas Americanas</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Analisa a retórica do governo Lula frente às tarifas americanas impostas por Donald Trump, apontando para uma possível falta de pragmatismo diplomático e as consequências políticas dessa postura, que pode ser influenciada por considerações eleitoreiras.</p>
+                </article>
+
+                <article class="news-item" id="a-escalada-da-crise">
+                    <h3>A Escalada da Crise: Tarifas de Trump e Polarização Política no Brasil</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Uma análise aprofundada da crise desencadeada pelas tarifas impostas por Donald Trump sobre produtos brasileiros e como essa situação se entrelaça com a polarização política interna do Brasil, criando um cenário complexo para a economia e a diplomacia nacional.</p>
+                </article>
+
+                <article class="news-item" id="o-veneno-da-polarizacao">
+                    <h3>O Veneno da Polarização no Brasil: Reflexões sobre o Debate Nacional</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A polarização política no Brasil continua a ser um obstáculo significativo para o debate construtivo sobre questões cruciais do país. A matéria aborda como a divisão ideológica afeta a capacidade de encontrar soluções e gerar consenso em pautas importantes para a nação, transformando o diálogo em confronto.</p>
+                </article>
+
+                <article class="news-item" id="lula-trump">
+                    <h3>Lula Cogita Encontro com Trump para Preservar Relações Comerciais</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O presidente Luiz Inácio Lula da Silva está avaliando a possibilidade de um encontro com o ex-presidente dos Estados Unidos, Donald Trump, caso este retorne à Casa Branca, visando preservar relações comerciais e econômicas. O principal objetivo dessa aproximação seria evitar qualquer impacto negativo no agronegócio e na indústria brasileira.</p>
+                    <h4>Detalhes e Perspectivas:</h4>
+                    <ul>
+                        <li>Apesar das diferenças ideológicas e da dificuldade de justificar a aproximação com Trump para sua base política, Lula prioriza os interesses econômicos do país.</li>
+                        <li>Há uma percepção de que Trump, mesmo com sua retórica forte, tende a ser pragmático em questões comerciais, o que poderia levar à moderação de suas políticas caso retorne ao poder.</li>
+                        <li>Atualmente, o Brasil busca manter um equilíbrio em suas relações internacionais, não dependendo excessivamente de um único parceiro, como China ou EUA. Para o PT e Lula, um distanciamento dos EUA é uma questão de princípio, mas a realidade econômica exige cautela.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="reforma-administrativa">
+                    <h3>Reforma Administrativa Começa com Críticas por Pagamento de "Penduricalhos"</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A proposta de reforma administrativa em debate no Congresso já enfrenta fortes críticas desde o início, especialmente devido à inclusão de um dispositivo que prioriza o pagamento de "penduricalhos", como auxílio-moradia e diárias, antes da remuneração básica dos servidores. Essa medida é vista como um obstáculo à compreensão e aceitação da reforma.</p>
+                    <h4>Controvérsias e Desdobramentos:</h4>
+                    <ul>
+                        <li>O coordenador do grupo de trabalho, Pedro Paulo (PSD-RJ), defende que a medida busca regularizar e tornar transparentes os gastos com esses benefícios. No entanto, críticos argumentam que a proposta desvia o foco do objetivo principal da reforma, que seria a modernização e otimização do serviço público.</li>
+                        <li>Uma emenda do relator da reforma, Darci Barroso (Republicanos-PE), permitiria que vantagens e benefícios não incorporados ao salário se tornassem o principal foco, desvirtuando a estrutura remuneratória.</li>
+                        <li>A priorização de "penduricalhos" é considerada uma contradição aos princípios constitucionais e pode comprometer a efetividade da reforma. A proposta ainda aguarda apreciação no Senado.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="ex-general-assumpcao">
+                    <h3>Ex-General Assumpção Apontado Como Autor de Plano para Atentar Contra Moraes, Lula e Alckmin</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Fontes próximas à investigação revelaram que o ex-presidente da FPE (Fundação de Previdência Complementar do Servidor Público Federal), general da reserva Paulo Sergio Nogueira de Assumpção, teria sido o autor intelectual de um plano para assassinar o ministro Alexandre de Moraes do STF, o presidente Lula e o vice-presidente Geraldo Alckmin. A informação teria sido confirmada em depoimento de Mauro Cid.</p>
+                    <h4>Conexões e Negações:</h4>
+                    <ul>
+                        <li>Assumpção já havia sido investigado em relação a uma suposta "rede de inteligência paralela" e à produção de documentos pela "gabinete do ódio".</li>
+                        <li>Os documentos da "gabinete do ódio" teriam sido encontrados na residência do ex-presidente Jair Bolsonaro, e Assumpção estaria envolvido na sua elaboração e disseminação.</li>
+                        <li>A defesa de Assumpção nega veementemente as acusações, classificando-as como "narrativas fantasiosas" e sem fundamento.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="seguranca-juridica">
+                    <h3>Nova Coalizão Pela Segurança Jurídica Busca Estabilidade para Investimentos no Brasil</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Foi formada uma nova coalizão pela segurança jurídica no Brasil, com o objetivo de reduzir a incerteza regulatória e judicial que afeta os investimentos e a tomada de decisões empresariais. A iniciativa busca criar um ambiente de negócios mais previsível e atrair mais investimentos para o país.</p>
+                    <h4>Impacto Econômico e Propostas:</h4>
+                    <ul>
+                        <li>Um estudo do Insper e da FGV aponta que a instabilidade regulatória e judicial gera um custo anual de R$ 390 bilhões para as empresas brasileiras.</li>
+                        <li>A coalizão propõe a criação de um Índice de Previsibilidade Regulatória e Judicial (IPRJ), que medirá a estabilidade e transparência do ambiente jurídico.</li>
+                        <li>A iniciativa é composta por diversas entidades importantes, como a CNI, Febraban e Anbima, com o propósito de propor soluções e promover o diálogo com o poder público.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="salario-minimo">
+                    <h3>Debate sobre Salário Mínimo e Impacto na Sustentabilidade Fiscal</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O governo brasileiro está em meio a um debate complexo sobre a política de valorização do salário mínimo, buscando um equilíbrio entre o aumento do poder de compra da população e a sustentabilidade fiscal do país. A proposta em discussão considera a inflação do ano anterior e o crescimento real do PIB para o reajuste.</p>
+                    <h4>Desafios e Considerações:</h4>
+                    <ul>
+                        <li>Um aumento do salário mínimo acima do que é considerado prudente pode gerar um risco fiscal significativo, impactando as contas públicas.</li>
+                        <li>Há discussões sobre qual índice de preço, como o INPC, seria o mais adequado para basear os reajustes, e se a valorização deve ser um consequência do crescimento econômico ou um motor dele.</li>
+                        <li>Especialistas alertam para a necessidade de cautela para evitar desequilíbrios orçamentários e garantir a solidez das finanças públicas.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="lusa-silvestre">
+                    <h3>Lusa Silvestre Aborda Masculinidade e Poder em Nova Obra</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A escritora Lusa Silvestre provoca a reflexão em seu novo livro ao discutir a masculinidade e as dinâmicas de poder na sociedade. A obra questiona a ideia de que "ela não lê homens", invertendo a perspectiva e indagando se os homens, de fato, não leem ou não se abrem para certas discussões.</p>
+                    <h4>Temas e Reflexões:</h4>
+                    <ul>
+                        <li>Silvestre explora o machismo e a possível relutância masculina em consumir literatura escrita por mulheres ou que aborda temas que confrontam certas construções de masculinidade.</li>
+                        <li>A autora incentiva uma reflexão sobre os privilégios inerentes a certas posições sociais e a necessidade de romper com paradigmas de gênero para uma sociedade mais equitativa.</li>
+                    </ul>
+                </article>
+            </section>
+            `,
+            'Seguranca e Meio Ambiente': `
+            <section class="category">
+                <h2>Segurança Pública e Meio Ambiente</h2>
+
+                <article class="news-item" id="retrato-do-desespero-gaza">
+                    <h3>Imagem da Semana: O Retrato do Desespero na Faixa de Gaza</h3>
+                    <img src="https://via.placeholder.com/800x450?text=Imagem+da+Faixa+de+Gaza" alt="Criança na Faixa de Gaza" style="max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px;">
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A escassez crítica de itens básicos e a devastadora situação humanitária na Faixa de Gaza são vividamente ilustradas pela impactante "Imagem da Semana". A foto capta a profunda angústia e o desespero de crianças em um cenário de conflito e privação, tornando-se um símbolo da crise na região.</p>
+                </article>
+
+                <article class="news-item" id="latrocinios-sp">
+                    <h3>Latrocínios Disparam em São Paulo, Enquanto Homicídios Apresentam Queda Desde 2012</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O estado de São Paulo registrou um preocupante aumento de 44% nos latrocínios no primeiro semestre de 2024, totalizando 96 casos na capital. Esse dado contrasta com a queda de 3% nos homicídios dolosos no mesmo período, uma tendência de diminuição observada desde 2012. O aumento dos roubos seguidos de morte preocupa as autoridades e a população.</p>
+                    <h4>Análise e Desafios:</h4>
+                    <ul>
+                        <li>Apesar da queda geral nos homicídios, a escalada dos latrocínios indica uma mudança na dinâmica da criminalidade, possivelmente ligada à intensificação de roubos.</li>
+                        <li>Especialistas em segurança pública sugerem que a crise econômica e o aumento do desemprego podem influenciar o crescimento de crimes contra o patrimônio, que por vezes resultam em mortes.</li>
+                        <li>As forças de segurança estão revisando estratégias para combater especificamente esse tipo de crime, focando na prevenção e na rápida elucidação dos casos.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="brumadinho">
+                    <h3>Nível de Emergência da Barragem de Brumadinho Aumenta Para Risco Iminente</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A Agência Nacional de Mineração (ANM) elevou o nível de emergência da barragem de B3/B4 da mina Córrego do Feijão, em Brumadinho (MG), para 2. Essa classificação indica uma situação de risco iminente, embora não haja indicação de ruptura imediata, apenas a necessidade de um monitoramento rigoroso.</p>
+                    <h4>Impacto na População e Medidas de Prevenção:</h4>
+                    <ul>
+                        <li>A elevação do nível de emergência foi motivada pela identificação de anomalias que exigem atenção redobrada e possíveis intervenções.</li>
+                        <li>A medida resultará na retirada de mais de 1.900 pessoas de suas casas nas comunidades de Paracatu, Pompéu e outras áreas próximas à barragem.</li>
+                        <li>A ANM e a defesa civil estão colaborando para monitorar a situação e garantir a segurança da população.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="conflitos-tailandia-camboja">
+                    <h3>Conflitos Armados Entre Tailândia e Camboja Resultam em Mortes na Fronteira</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Confrontos armados na fronteira entre Tailândia e Camboja provocaram a morte de 12 pessoas, incluindo militares e civis. Os embates, que envolveram o uso de artilharia, geraram o deslocamento de milhares de moradores das regiões afetadas.</p>
+                    <h4>Causa e Impactos:</h4>
+                    <ul>
+                        <li>A principal causa dos conflitos é uma disputa territorial por uma área que abriga um templo antigo.</li>
+                        <li>Ambos os países se acusam mutuamente de iniciar os ataques e de violar os acordos de cessar-fogo.</li>
+                        <li>A comunidade internacional, incluindo a ONU, tem pedido a contenção e o diálogo entre as partes para resolver a crise.</li>
+                    </ul>
+                </article>
+            </section>
+            `,
+            'Economia & Negocios': `
+            <section class="category">
+                <h2>Economia & Negócios</h2>
+
+                <article class="news-item" id="radar-economico">
+                    <h3>Radar: Dólar, Inflação e Cenário Econômico Brasileiro</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Notas rápidas sobre os principais indicadores econômicos, incluindo a valorização do dólar, as projeções para a inflação, e a análise de movimentos que impactam o cenário econômico brasileiro.</p>
+                </article>
+
+                <article class="news-item" id="o-rato-que-ruge">
+                    <h3>O Rato que Ruge: Impacto das Tarifas Americanas na Economia Brasileira</h3>
+                    <p><strong>Autor:</strong> Alexandre Schwartsman</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Artigo de Alexandre Schwartsman que discute o impacto das tarifas comerciais impostas pelos Estados Unidos na economia brasileira. A análise aborda a assimetria de poder entre os dois países e a luta desigual que o Brasil enfrenta para mitigar os efeitos dessas medidas protecionistas.</p>
+                </article>
+
+                <article class="news-item" id="missao-dificil-tarifas">
+                    <h3>Missão Difícil: Esforços para Conter os Danos do Tarifaço Americano nas Exportações Brasileiras</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Detalhes sobre os complexos e desafiadores esforços diplomáticos e econômicos que o Brasil está empreendendo para conter os danos causados pelas tarifas impostas por Donald Trump sobre produtos brasileiros. A reportagem explora como esses "tarifaços" ameaçam diversos setores exportadores e empresas, e as estratégias adotadas para minimizar o impacto negativo nas cadeias de valor e nos empregos.</p>
+                </article>
+
+                <article class="news-item" id="internet-brasil">
+                    <h3>Acesso à Internet no Brasil: Banda Larga Fixa Predomina, mas Desafios Persistem</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O acesso à internet no Brasil atingiu 98,8% da população em 2023, consolidando a banda larga fixa como a forma mais comum de conexão. Apesar do avanço significativo na conectividade, o país ainda enfrenta desafios em termos de qualidade e infraestrutura em algumas regiões, especialmente as mais remotas ou carentes.</p>
+                    <h4>Cenário e Perspectivas:</h4>
+                    <ul>
+                        <li>A pesquisa aponta que a maioria dos brasileiros utiliza a internet diariamente para diversas finalidades, desde comunicação e entretenimento até trabalho e estudo.</li>
+                        <li>Apesar da predominância da banda larga fixa, a conectividade móvel também desempenha um papel crucial, especialmente em áreas onde a infraestrutura fixa é limitada.</li>
+                        <li>Os desafios incluem a garantia de acesso de alta qualidade em todo o território nacional, a redução das desigualdades digitais e o investimento contínuo em infraestrutura para suportar a crescente demanda.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="leiloes-imoveis-veiculos">
+                    <h3>Leilões de Imóveis e Veículos Oferecem Oportunidades Atraentes no Mercado</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Diversos leilões estão sendo realizados no Brasil, apresentando excelentes oportunidades para a aquisição de imóveis e veículos com preços competitivos. Esses eventos atraem tanto investidores em busca de bons negócios quanto compradores finais em procura de bens por valores abaixo do mercado.</p>
+                    <h4>Destaques dos Leilões:</h4>
+                    <ul>
+                        <li>**Leilão de Imóvel em Guarujá-SP:** Disponível um terreno de 250m² em Santa Cruz, Itatiba/SP, com lances iniciais a partir de R$ 217.710,00 na primeira praça e R$ 167.608,04 na segunda praça. O imóvel está em localização privilegiada, próximo a shopping, escolas e hospitais.</li>
+                        <li>**Leilões de Veículos Bradesco:** Variedade de modelos de carros e motocicletas, incluindo veículos como Fiat Argo Drive 1.0, Honda Civic LXL 1.8 e Yamaha XTZ 250 Lander.</li>
+                        <li>Plataformas online como Sodré Santoro e Bradesco facilitam a participação remota, tornando os leilões acessíveis a um público mais amplo.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="e-investidor">
+                    <h3>E-Investidor Lança "Direto da Faria Lima" para Informações de Bastidor Checadas</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O portal E-Investidor inova ao lançar a nova seção "Direto da Faria Lima", que promete ir além das notícias superficiais, diferenciando "fofoca de mercado" de informações de bastidor checadas diretamente na fonte. A iniciativa visa oferecer conteúdo de maior profundidade e valor para o mercado financeiro.</p>
+                    <h4>Conteúdo e Acesso:</h4>
+                    <ul>
+                        <li>A nova seção disponibilizará entrevistas exclusivas com gestoras, reportagens aprofundadas, análises especiais e estratégias de investimento.</li>
+                        <li>O objetivo é munir os investidores com dados e insights estratégicos que podem fazer a diferença em suas decisões.</li>
+                        <li>A seção pode ser acessada de forma prática via QR Code pelo celular.</li>
+                    </ul>
+                </article>
+            </section>
+            `,
+            'Cultura, Lazer e Sociedade': `
+            <section class="category">
+                <h2>Cultura, Lazer e Sociedade</h2>
+
+                <article class="news-item" id="a-permanencia-da-pobreza">
+                    <h3>A Permanência da Pobreza: Uma Nova Consciência para a Erradicação</h3>
+                    <p><strong>Autor:</strong> Cristovam Buarque</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Artigo de Cristovam Buarque que aborda a persistência da pobreza e a necessidade de uma nova abordagem para sua erradicação. O autor argumenta que a luta contra a pobreza vai além de soluções meramente econômicas, exigindo uma mudança de mentalidade e políticas sociais mais abrangentes e eficazes.</p>
+                </article>
+
+                <article class="news-item" id="trajetoria-sinuosa-jose-maria-marin">
+                    <h3>Datas - Trajetória Sinuosa: José Maria Marin e o Escândalo Fifagate</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A reportagem recapitula a controversa carreira política e esportiva de José Maria Marin, ex-presidente da CBF, e seu envolvimento no escândalo Fifagate, que abalou o futebol mundial. A trajetória de Marin é marcada por altos cargos e acusações de corrupção, culminando em sua prisão e condenação.</p>
+                </article>
+
+                <article class="news-item" id="um-homem-de-ideias-roberto-duailibi">
+                    <h3>Datas - Um Homem de Ideias: Roberto Duailibi e sua Contribuição para a Publicidade Brasileira</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Homenagem a Roberto Duailibi, figura icônica da publicidade brasileira. A matéria destaca sua vasta contribuição para o setor, suas campanhas memoráveis e seu legado como um dos grandes pensadores e inovadores da comunicação no Brasil, influenciando gerações de profissionais.</p>
+                </article>
+
+                <article class="news-item" id="um-legado-de-resiliencia-preta-gil">
+                    <h3>Datas - Um Legado de Resiliência: Preta Gil, Carreira e Luta Contra o Câncer</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Uma reportagem emocionante sobre a carreira da cantora Preta Gil, sua influência na música e na cultura, e sua notável luta contra o câncer. A matéria celebra seu legado de resiliência, força e a forma como ela inspira seus fãs e o público em geral diante de adversidades.</p>
+                </article>
+
+                <article class="news-item" id="conversa-fabcaro-asterix">
+                    <h3>Conversa com Fabcaro: O Novo Roteirista de Asterix e Obelix e a Magia de "A Íris Branca"</h3>
+                    <img src="https://via.placeholder.com/800x450?text=Fabcaro+e+Asterix" alt="Fabcaro e Asterix" style="max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px;">
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Entrevista com Fabcaro, o aclamado novo roteirista por trás das aventuras de Asterix e Obelix. Ele compartilha detalhes sobre seu processo criativo no álbum "A Íris Branca" e os desafios e responsabilidades de dar continuidade ao legado de uma das mais icônicas séries de quadrinhos do mundo, mantendo seu humor e espírito originais.</p>
+                </article>
+
+                <article class="news-item" id="culinaria-grega">
+                    <h3>Tradição e Modernidade na Culinária Grega em São Paulo: Um Passeio pelos Sabores do Mediterrâneo</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A cena gastronômica grega em São Paulo oferece uma rica fusão de tradição e modernidade, com estabelecimentos que celebram a riqueza de ingredientes frescos e temperos marcantes, como o Acropolis e Prato Grego. É um convite a um passeio pelos sabores autênticos do Mediterrâneo, sem sair da cidade.</p>
+                </article>
+
+                <article class="news-item" id="vikings-restaurante">
+                    <h3>Vikings no Tamanho e na Fartura: Uma Experiência Gastronômica Temática em São Paulo</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O restaurante Vikings, em São Paulo, proporciona uma experiência gastronômica imersiva que transporta os clientes para a era nórdica, com um ambiente temático e pratos servidos em fartura, remetendo aos banquetes vikings. Desde a decoração até o vestuário dos atendentes, tudo é pensado para criar uma atmosfera autêntica.</p>
+                    <h4>Cardápio e Atrações:</h4>
+                    <ul>
+                        <li>O cardápio inclui opções como a costelinha com molho barbecue e os pastéis de camarão.</li>
+                        <li>Um dos destaques é o "churrasco viking", uma opção completa para 4 pessoas, disponível por R$ 329,90.</li>
+                        <li>A experiência é complementada por drinks temáticos e a oportunidade de se caracterizar como um viking para fotos.</li>
+                        <li>A unidade principal do restaurante está localizada na Rua Euclides Pacheco, 770, no Tatuapé.</li>
+                    </ul>
+                </article>
+
+                <article class="news-item" id="orquestra-heliopolis">
+                    <h3>Orquestra Sinfônica Heliópolis em Apresentação Única no Teatro Municipal</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A Orquestra Sinfônica Heliópolis realizará uma apresentação especial no Teatro Municipal de São Paulo, no dia 30 de julho, às 20h. Este evento oferece uma oportunidade única de apreciar a performance dessa renomada orquestra, conhecida por seu trabalho social e cultural.</p>
+                    <h4>Informações sobre o Evento:</h4>
+                    <ul>
+                        <li>Os ingressos para a apresentação têm o custo de R$ 40,00 (inteira), com meia-entrada a R$ 20,00.</li>
+                    </ul>
+                </article>
+            </section>
+            `,
+            'Esportes': `
+            <section class="category">
+                <h2>Esportes</h2>
+
+                <article class="news-item" id="futsal-feminino">
+                    <h3>Futsal Feminino: Brasil Vence Alemanha e Avança às Semifinais da Liga das Nações</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>A equipe brasileira de futsal feminino garantiu sua vaga na semifinal da Liga das Nações ao demonstrar uma performance impecável e vencer a Alemanha por três sets a zero. A vitória coloca o Brasil em uma posição de destaque para disputar o título do torneio internacional.</p>
+                    <h4>Caminho para a Semifinal:</h4>
+                    <ul>
+                        <li>A partida decisiva foi realizada em Nagoya, no Japão.</li>
+                        <li>O Brasil agora se prepara para enfrentar a equipe do Japão na semifinal, em um confronto que promete ser desafiador.</li>
+                        <li>As jogadoras brasileiras exibiram um alto nível de entrosamento e habilidade em quadra, fundamentais para a conquista da vitória.</li>
+                        <li>Os placares dos sets foram de 25/20, 25/20, 22/25 e 15/9, evidenciando a intensidade e competitividade do jogo.</li>
+                    </ul>
+                </article>
+            </section>
+            `,
+            'Páginas Amarelas': `
+            <section class="category">
+                <h2>Páginas Amarelas</h2>
+
+                <article class="news-item" id="entrevista-david-ricks">
+                    <h3>Entrevista Exclusiva com David Ricks: O "Doutor Mounjaro" e a Luta Contra a Obesidade</h3>
+                    <p><strong>Autor:</strong> Equipe Portal BM</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>O CEO da Eli Lilly, David Ricks, carinhosamente apelidado de "Doutor Mounjaro", detalha os planos ambiciosos da farmacêutica para ir além do tratamento da obesidade, buscando erradicá-la. Em entrevista exclusiva, Ricks revela que o "boom" do Mounjaro para a perda de peso é apenas o começo de uma revolução na saúde. A demanda pelo medicamento é tão grande que a empresa mal consegue acompanhar, com bilhões de dólares investidos para aumentar a produção e a expectativa de atender a 150 milhões de pessoas nos próximos cinco anos. Ele destaca que o Mounjaro tem se mostrado eficaz tanto para diabetes tipo 2 quanto para obesidade, com estudos clínicos que indicam uma perda média de 26,6% do peso corporal em pacientes obesos.</p>
+                    <p>A Eli Lilly também está em uma busca incessante por produtos inovadores, incluindo uma promissora droga para o combate ao Alzheimer, em fase avançada de testes. Ricks enfatiza a importância da pesquisa e desenvolvimento, apesar dos custos bilionários e dos riscos de insucesso, para transformar a vida das pessoas. A empresa adota uma estratégia de "fail fast", investindo em múltiplos alvos para aumentar as chances de sucesso. Ele também comenta sobre o debate em torno dos custos dos medicamentos, argumentando que o valor real está nos resultados que geram, como a redução de cirurgias e outras complicações de saúde a longo prazo. A visão de Ricks é clara: a obesidade deve ser tratada como uma doença crônica e grave, e não apenas uma questão de estilo de vida, com a medicina desempenhando um papel fundamental para reverter a epidemia global.</p>
+                </article>
+
+                <article class="news-item" id="o-pais-dos-incapazes">
+                    <h3>O País dos Incapazes?: Artigo de Fernando Schüler sobre a Hipossuficiência do Cidadão</h3>
+                    <p><strong>Autor:</strong> Fernando Schüler</p>
+                    <p><strong>Fonte:</strong> Revista Veja</p>
+                    <p>Em seu artigo "O País dos Incapazes?", Fernando Schüler critica a mentalidade de "hipossuficiência" do cidadão brasileiro, onde o Estado e as instituições operam sob a premissa de que o indivíduo é incapaz de tomar decisões por si mesmo. Schüler aponta como essa visão paternalista se manifesta em diversas esferas da vida nacional, suprimindo a autonomia e a liberdade individual.</p>
+                    <p>Ele cita exemplos como as contribuições sindicais compulsórias, que forçam os trabalhadores a financiar entidades mesmo contra sua vontade, e a gestão do Fundo de Garantia do Tempo de Serviço (FGTS), onde o governo decide a melhor aplicação do dinheiro do trabalhador, mesmo em detrimento de uma rentabilidade mais favorável. A discussão se estende à liberdade de expressão, com a imposição de limites sobre o que pode ser dito ou pensado, e à educação, onde há uma tendência a controlar o currículo sem dar voz às famílias sobre a formação de seus filhos.</p>
+                    <p>Schüler argumenta que essa cultura da "incapacidade" é um entrave ao desenvolvimento de uma sociedade mais madura e responsável, perpetuando a dependência do Estado e inibindo a inovação e o empreendedorismo. Ele defende uma maior autonomia para o cidadão, com menos intervenção estatal e mais liberdade para escolhas individuais, como caminho para construir um país mais próspero e livre.</p>
+                </article>
+            </section>
+            `
+        };
+
+        function generateMassCode() {
+            const inputBlock = document.getElementById('news-input').value.trim();
+            const outputBlocksContainer = document.getElementById('output-blocks-container');
+            const loadingSpinner = document.getElementById('loading-spinner');
+
+            outputBlocksContainer.innerHTML = ''; // Limpa saídas anteriores
+            loadingSpinner.style.display = 'block'; // Mostra o spinner
+
+            // Pequeno atraso para o spinner aparecer antes do processamento pesado
+            setTimeout(() => {
+                try {
+                    const sections = {}; // Objeto para armazenar as novas notícias por seção
+
+                    // Divide o input em notícias individuais
+                    const rawNewsBlocks = inputBlock.split(/\n\n\[SECAO:/).map(block => block.trim());
+
+                    rawNewsBlocks.forEach((block, index) => {
+                        let currentBlock = block;
+                        let sectionName = '';
+
+                        if (index === 0 && !block.startsWith('[SECAO:')) {
+                            alert("Erro: O primeiro bloco de notícias não começou com '[SECAO:]'. Por favor, siga o formato.");
+                            loadingSpinner.style.display = 'none';
+                            return; // Sai da função
+                        } else if (index !== 0) {
+                            sectionName = currentBlock.substring(0, currentBlock.indexOf(']')).replace(':', '').trim();
+                            currentBlock = currentBlock.substring(currentBlock.indexOf(']') + 1).trim();
+                        } else {
+                            // First block starts with [SECAO:]
+                            sectionName = currentBlock.substring(0, currentBlock.indexOf(']')).replace('[SECAO:', '').trim();
+                            currentBlock = currentBlock.substring(currentBlock.indexOf(']') + 1).trim();
+                        }
+
+                        if (!sectionTemplates.hasOwnProperty(sectionName)) {
+                            alert(`Erro: Seção "${sectionName}" não reconhecida. Verifique o nome da seção. Notícia: "${currentBlock.split('\n')[0]}".`);
+                            loadingSpinner.style.display = 'none';
+                            return;
+                        }
+
+                        const lines = currentBlock.split('\n').map(line => line.trim());
+
+                        if (lines.length < 4) {
+                            alert(`Erro de formatação na notícia da seção "${sectionName}". Faltam informações (título, autor, fonte, texto). Notícia: "${lines[0] || 'Desconhecida'}"`);
+                            loadingSpinner.style.display = 'none';
+                            return;
+                        }
+
+                        const titulo = lines[0];
+                        const autor = lines[1];
+                        const fonte = lines[2];
+                        const texto = lines.slice(3).join('\n'); // O resto é o texto
+
+                        // Gera um ID simples para a notícia a partir do título
+                        const newsId = titulo.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-*|-*$/g, '');
+
+                        const newsHtml = `
+            <article class="news-item" id="${newsId}">
+                <h3>${titulo}</h3>
+                <p><strong>Autor:</strong> ${autor}</p>
+                <p><strong>Fonte:</strong> <a href="${fonte.startsWith('http') ? fonte : '#'}" target="_blank" rel="noopener noreferrer">${fonte}</a></p>
+                <p>${texto.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>
+                </article>
+                        `;
+
+                        if (!sections[sectionName]) {
+                            sections[sectionName] = [];
+                        }
+                        sections[sectionName].push(newsHtml);
+                    });
+
+                    // Agora, gerar o HTML completo para cada seção
+                    for (const sectionName in sectionTemplates) {
+                        const newNewsHtml = sections[sectionName] ? sections[sectionName].join('\n') : '';
+                        
+                        // Encontra o ponto de inserção no template existente
+                        // Queremos inserir logo abaixo do <h2>Nome da Seção</h2>
+                        const currentSectionContent = sectionTemplates[sectionName];
+                        const h2Tag = `<h2>${sectionName}</h2>`;
+                        const insertionPointIndex = currentSectionContent.indexOf(h2Tag);
+
+                        let finalSectionHtml = '';
+
+                        if (insertionPointIndex !== -1) {
+                            // Encontra o final da linha do h2 para inserir logo depois
+                            const endOfH2TagIndex = currentSectionContent.indexOf('\n', insertionPointIndex + h2Tag.length);
+                            const beforeH2 = currentSectionContent.substring(0, endOfH2TagIndex + 1);
+                            const afterH2 = currentSectionContent.substring(endOfH2TagIndex + 1);
+
+                            finalSectionHtml = beforeH2 + newNewsHtml + afterH2;
+                        } else {
+                            // Fallback caso o <h2> não seja encontrado (deveria estar no template)
+                            finalSectionHtml = `<section class="category">\n    <h2>${sectionName}</h2>\n` + newNewsHtml + currentSectionContent.replace(/^<section class="category">[\s\S]*?<\/h2>\s*/, '');
+                        }
+
+
+                        const fileName = sectionName.toLowerCase().replace(/ /g, '_').replace(/&/g, 'e').replace(/,/, '').replace(/_e_/, '_');
+                        
+                        const fullPageHtml = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${sectionName} - Portal BM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Portal BM</h1>
+        <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
+        <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank" rel="noopener noreferrer">
+            <img src="banner.jpg" alt="Banner do Portal BM" class="header-banner">
+        </a>
+    </header>
+
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="politica_nacional.html"${sectionName === 'Politica Nacional' ? ' class="active"' : ''}>Política Nacional</a></li>
+                <li><a href="seguranca_meio_ambiente.html"${sectionName === 'Seguranca e Meio Ambiente' ? ' class="active"' : ''}>Segurança e Meio Ambiente</a></li>
+                <li><a href="economia_negocios.html"${sectionName === 'Economia & Negocios' ? ' class="active"' : ''}>Economia & Negócios</a></li>
+                <li><a href="cultura_lazer_sociedade.html"${sectionName === 'Cultura, Lazer e Sociedade' ? ' class="active"' : ''}>Cultura, Lazer e Sociedade</a></li>
+                <li><a href="esportes.html"${sectionName === 'Esportes' ? ' class="active"' : ''}>Esportes</a></li>
+                <li><a href="paginas_amarelas.html"${sectionName === 'Páginas Amarelas' ? ' class="active"' : ''}>Páginas Amarelas</a></li>
+                <li><a href="criar_noticia.html" class="menu-oculto">Publicar Notícia (Única)</a></li>
+                <li><a href="publicacao_massa.html" class="active menu-oculto">Publicação em Massa</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        ${finalSectionHtml}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>`;
+
+                        // Cria o elemento de saída para cada seção

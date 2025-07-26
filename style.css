@@ -8,285 +8,251 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #007bff;
     color: #fff;
     padding: 1rem 0;
     text-align: center;
+    position: relative; /* Para posicionar o banner dentro */
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 2.5em;
 }
 
 header p {
-    margin: 0.5rem 0 0;
-    font-size: 1.1rem;
+    margin: 5px 0 15px 0;
+    font-size: 1.1em;
 }
 
-nav {
-    background-color: #0056b3;
-    padding: 0.8rem 0;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.header-banner {
+    max-width: 100%; /* Garante que a imagem se ajuste à largura do header */
+    height: auto;
+    display: block; /* Remove espaço extra abaixo da imagem */
+    margin: 15px auto 0 auto; /* Centraliza e adiciona margem superior */
+    border-radius: 8px; /* Cantos arredondados, se desejar */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra suave */
 }
 
-nav ul {
+/* Estilos para o menu no desktop (padrão) */
+.main-nav {
+    background-color: #007bff; /* Cor de fundo padrão para o menu */
+    padding: 10px 0;
+    width: 100%;
+    /* No desktop, ele fica no fluxo normal do documento */
+}
+
+.main-nav .nav-wrapper {
+    max-width: 1200px; /* Largura máxima para centralizar o conteúdo */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Para quebra de linha em telas pequenas */
+    display: flex; /* Para alinhar os itens horizontalmente */
+    justify-content: center; /* Centraliza os itens do menu */
+    flex-wrap: wrap; /* Permite quebrar linha se não couber */
 }
 
-nav ul li {
-    margin: 0 15px;
+.main-nav ul li {
+    margin: 0 15px; /* Espaçamento entre os itens do menu */
 }
 
-nav ul li a {
+.main-nav ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
     transition: background-color 0.3s ease;
+    display: block; /* Para que o padding e hover funcionem em toda a área */
 }
 
-nav ul li a:hover,
-nav ul li a.active {
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
     background-color: #004085;
     border-radius: 5px;
 }
 
+/* --- CORREÇÃO: Ocultar menus específicos de forma mais forte --- */
+.main-nav ul li .menu-oculto {
+    display: none !important; /* !important garante que sobrescreve outras regras */
+}
+/* FIM DA CORREÇÃO */
+
+
 main {
     padding: 20px;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 20px auto;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
 }
 
-/* Estilos para o banner */
 .banner-section {
     text-align: center;
     margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #eee;
 }
 
 .main-banner {
     max-width: 100%;
-    /* Nova linha: Limita a altura máxima do banner */
-    max-height: 250px; /* Você pode ajustar este valor (ex: 180px, 200px, 300px) */
-    width: auto; /* Garante que a largura se ajuste à altura mantendo a proporção */
-    object-fit: cover; /* Recorta a imagem para cobrir a área sem distorcer */
-    border-radius: 5px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .banner-text {
+    margin-top: 15px;
     font-size: 1.2em;
     color: #555;
-    font-style: italic;
+}
 
 .category {
     margin-bottom: 40px;
 }
 
 .category h2 {
-    color: #0056b3;
-    border-bottom: 2px solid #0056b3;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
     padding-bottom: 10px;
     margin-bottom: 20px;
-    font-size: 2rem;
+    font-size: 2em;
 }
 
-.news-item {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #eee;
-}
-
-.news-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.news-item h3 {
-    color: #007bff;
-    margin-top: 0;
-    font-size: 1.5rem;
-}
-
-/* Estilo para as notícias na página inicial (resumo) */
 .home-news .news-summary-item {
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px dotted #ccc;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.home-news .news-summary-item:last-child {
-    border-bottom: none;
+.home-news .news-summary-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .home-news .news-summary-item h3 {
-    font-size: 1.3rem;
-    margin-bottom: 5px;
+    margin-top: 0;
+    font-size: 1.4em;
+    color: #333;
 }
 
 .home-news .news-summary-item h3 a {
-    color: #007bff;
     text-decoration: none;
+    color: #007bff;
 }
 
 .home-news .news-summary-item h3 a:hover {
     text-decoration: underline;
 }
 
-.news-item h4 {
-    color: #555;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-size: 1.1rem;
+.home-news .news-summary-item p {
+    font-size: 0.95em;
+    color: #666;
+}
+
+.news-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.news-item h3 {
+    color: #0056b3;
+    margin-top: 0;
+    font-size: 1.8em;
+    margin-bottom: 10px;
 }
 
 .news-item p {
     margin-bottom: 10px;
 }
 
+.news-item p strong {
+    color: #555;
+}
+
 .news-item ul {
-    list-style-type: disc;
+    list-style: disc;
     margin-left: 20px;
-    padding: 0;
+    margin-bottom: 10px;
 }
 
 .news-item ul li {
     margin-bottom: 5px;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-    margin: 40px 0;
-}
-
 footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
     background-color: #333;
     color: #fff;
-    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 30px;
+    position: relative; /* Para o ajuste no celular */
+    width: 100%;
 }
 
+/* --- Media Query para Telas Menores (Celulares) --- */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
+    /* Oculta o header principal para dar mais espaço no celular */
+    header {
+        display: none;
     }
-    nav ul {
+
+    /* Move o menu para o rodapé */
+    .main-nav {
+        position: fixed; /* Fixa o menu na parte inferior da tela */
+        bottom: 0; /* Alinha na parte de baixo */
+        left: 0;
+        width: 100%;
+        background-color: #007bff; /* Cor de fundo */
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Sombra para destacar */
+        z-index: 1000; /* Garante que fique acima de outros elementos */
+        padding: 0; /* Remove padding vertical */
+    }
+
+    .main-nav .nav-wrapper {
+        padding: 0; /* Remove padding lateral no wrapper */
+    }
+
+    .main-nav ul {
+        justify-content: space-around; /* Distribui os itens uniformemente */
+        padding: 10px 0; /* Padding para os itens dentro do rodapé */
+        flex-wrap: nowrap; /* Impede quebra de linha no rodapé */
+        overflow-x: auto; /* Adiciona scroll horizontal se muitos itens */
+        -webkit-overflow-scrolling: touch; /* Melhor scroll em iOS */
+    }
+
+    .main-nav ul li {
+        margin: 0; /* Remove margens entre os itens para preencher melhor */
+        flex-shrink: 0; /* Impede que os itens encolham */
+        padding: 0 5px; /* Espaçamento interno para os itens */
+    }
+
+    .main-nav ul li a {
+        font-size: 0.75em; /* Reduz o tamanho da fonte para caber mais */
+        padding: 5px 2px; /* Reduz padding dos links */
+        text-align: center;
+        /* Opcional: Para icones, se você for adicionar: */
+        /* display: flex;
         flex-direction: column;
+        align-items: center; */
     }
-    nav ul li {
-        margin: 5px 0;
-    }
-    .category h2 {
-        font-size: 1.8rem;
-    }
-    .news-item h3, .home-news .news-summary-item h3 {
-        font-size: 1.3rem;
-    }
+
+    /* Ajuste no conteúdo principal para não ficar por baixo do menu fixo */
     main {
-        padding: 15px;
-        margin: 15px auto;
+        padding-bottom: 70px; /* Adiciona um padding na parte inferior do main */
     }
-}
 
-/* ... seu CSS existente ... */
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #004085;
-    border-radius: 5px;
-}
-
-/* Adicione a nova página de publicação no menu */
-nav ul li a[href="criar_noticia.html"] {
-    /* Pode adicionar um estilo diferente se quiser destacar */
-}
-
-/* ... o restante do seu CSS permanece o mesmo ... */
-
-/* ... seu CSS existente ... */
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #004085;
-    border-radius: 5px;
-}
-
-/* Adicione a nova página de publicação no menu */
-nav ul li a[href="criar_noticia.html"] {
-    /* Opcional: estilo diferente se quiser destacar */
-}
-nav ul li a[href="publicacao_massa.html"] {
-    /* Opcional: estilo diferente se quiser destacar */
-}
-/* Nova linha para Páginas Amarelas */
-nav ul li a[href="paginas_amarelas.html"] {
-    /* Opcional: estilo diferente se quiser destacar */
-}
-
-/* ... o restante do seu CSS permanece o mesmo ... */
-
-
-/* Ocultar menus específicos pelo atributo href */
-nav ul li a[href="criar_noticia.html"],
-nav ul li a[href="publicacao_massa.html"] {
-    display: none;
+    /* O footer original pode ser ajustado ou ocultado se necessário no celular */
+    footer {
+        margin-bottom: 60px; /* Ajusta o footer para ficar acima do menu fixo */
+    }
 }

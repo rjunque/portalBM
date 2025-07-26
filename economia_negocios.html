@@ -9,7 +9,7 @@
 <body>
     <header>
         <h1>Portal BM</h1>
-        <p>As notícias mais importantes do dia anterior, reunidas em um só lugar.</p>
+        <p>As notícias mais importantes do dia, reunidas em um solo lugar.</p>
     </header>
 
     <nav>
@@ -20,6 +20,9 @@
             <li><a href="economia_negocios.html" class="active">Economia & Negócios</a></li>
             <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
             <li><a href="esportes.html">Esportes</a></li>
+            <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
+            <li><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
+            <li><a href="publicacao_massa.html">Publicação em Massa</a></li>
         </ul>
     </nav>
 
@@ -27,43 +30,57 @@
         <section class="category">
             <h2>Economia & Negócios</h2>
 
-            <article class="news-item">
+            <article class="news-item" id="radar-economico">
+                <h3>Radar: Dólar, Inflação e Cenário Econômico Brasileiro</h3>
+                <p><strong>Autor:</strong> Equipe Portal BM</p>
+                <p><strong>Fonte:</strong> Revista Veja</p>
+                <p>Notas rápidas sobre os principais indicadores econômicos, incluindo a valorização do dólar, as projeções para a inflação, e a análise de movimentos que impactam o cenário econômico brasileiro.</p>
+            </article>
+
+            <article class="news-item" id="o-rato-que-ruge">
+                <h3>O Rato que Ruge: Impacto das Tarifas Americanas na Economia Brasileira</h3>
+                <p><strong>Autor:</strong> Alexandre Schwartsman</p>
+                <p><strong>Fonte:</strong> Revista Veja</p>
+                <p>Artigo de Alexandre Schwartsman que discute o impacto das tarifas comerciais impostas pelos Estados Unidos na economia brasileira. A análise aborda a assimetria de poder entre os dois países e a luta desigual que o Brasil enfrenta para mitigar os efeitos dessas medidas protecionistas.</p>
+            </article>
+
+            <article class="news-item" id="missao-dificil-tarifas">
+                <h3>Missão Difícil: Esforços para Conter os Danos do Tarifaço Americano nas Exportações Brasileiras</h3>
+                <p><strong>Autor:</strong> Equipe Portal BM</p>
+                <p><strong>Fonte:</strong> Revista Veja</p>
+                <p>Detalhes sobre os complexos e desafiadores esforços diplomáticos e econômicos que o Brasil está empreendendo para conter os danos causados pelas tarifas impostas por Donald Trump sobre produtos brasileiros. A reportagem explora como esses "tarifaços" ameaçam diversos setores exportadores e empresas, e as estratégias adotadas para minimizar o impacto negativo nas cadeias de valor e nos empregos.</p>
+            </article>
+
+            <article class="news-item" id="internet-brasil">
                 <h3>Acesso à Internet no Brasil: Banda Larga Fixa Predomina, mas Desafios Persistem</h3>
-                <p>O acesso à internet no Brasil atingiu a marca de 98,8% da população em 2023, com a banda larga fixa se consolidando como a forma mais comum de conexão. Apesar do avanço significativo na conectividade, o país ainda enfrenta desafios relacionados à qualidade, acessibilidade e infraestrutura em algumas regiões.</p>
-                <h4>Dados de Conectividade e Uso:</h4>
+                <p><strong>Autor:</strong> Equipe Portal BM</p>
+                <p><strong>Fonte:</strong> Revista Veja</p>
+                <p>O acesso à internet no Brasil atingiu 98,8% da população em 2023, consolidando a banda larga fixa como a forma mais comum de conexão. Apesar do avanço significativo na conectividade, o país ainda enfrenta desafios em termos de qualidade e infraestrutura em algumas regiões, especialmente as mais remotas ou carentes.</p>
+                <h4>Cenário e Perspectivas:</h4>
                 <ul>
-                    <li>O percentual de domicílios com acesso à internet é de 96,7%.</li>
-                    <li>A banda larga fixa está presente em 97,5% dos domicílios conectados, enquanto a banda larga móvel é utilizada por 93,4%.</li>
-                    <li>A região Nordeste apresenta os menores percentuais de acesso à internet por telefone celular (93%) e por computador/tablet (33,4%).</li>
-                    <li>O tempo médio de acesso à internet por telefone celular é de 5h40min por dia.</li>
-                    <li>Os principais usos da internet incluem redes sociais (94,7%), aplicativos de mensagem (94,5%) e consumo de vídeos/filmes (94,4%).</li>
+                    <li>A pesquisa aponta que a maioria dos brasileiros utiliza a internet diariamente para diversas finalidades, desde comunicação e entretenimento até trabalho e estudo.</li>
+                    <li>Apesar da predominância da banda larga fixa, a conectividade móvel também desempenha um papel crucial, especialmente em áreas onde a infraestrutura fixa é limitada.</li>
+                    <li>Os desafios incluem a garantia de acesso de alta qualidade em todo o território nacional, a redução das desigualdades digitais e o investimento contínuo em infraestrutura para suportar a crescente demanda.</li>
                 </ul>
             </article>
 
-            <article class="news-item">
+            <article class="news-item" id="leiloes-imoveis-veiculos">
                 <h3>Leilões de Imóveis e Veículos Oferecem Oportunidades Atraentes no Mercado</h3>
+                <p><strong>Autor:</strong> Equipe Portal BM</p>
+                <p><strong>Fonte:</strong> Revista Veja</p>
                 <p>Diversos leilões estão sendo realizados no Brasil, apresentando excelentes oportunidades para a aquisição de imóveis e veículos com preços competitivos. Esses eventos atraem tanto investidores em busca de bons negócios quanto compradores finais em procura de bens por valores abaixo do mercado.</p>
                 <h4>Destaques dos Leilões:</h4>
                 <ul>
-                    <li>Leilão de Imóvel em Guarujá-SP: Disponível um terreno de 250m² em Santa Cruz, Itatiba/SP, com lances iniciais a partir de R$ 217.710,00 na primeira praça e R$ 167.608,04 na segunda praça. O imóvel está em localização privilegiada, próximo a shopping, escolas e hospitais.</li>
-                    <li>Leilões de Veículos Bradesco: Variedade de modelos de carros e motocicletas, incluindo veículos como Fiat Argo Drive 1.0, Honda Civic LXL 1.8 e Yamaha XTZ 250 Lander.</li>
+                    <li>**Leilão de Imóvel em Guarujá-SP:** Disponível um terreno de 250m² em Santa Cruz, Itatiba/SP, com lances iniciais a partir de R$ 217.710,00 na primeira praça e R$ 167.608,04 na segunda praça. O imóvel está em localização privilegiada, próximo a shopping, escolas e hospitais.</li>
+                    <li>**Leilões de Veículos Bradesco:** Variedade de modelos de carros e motocicletas, incluindo veículos como Fiat Argo Drive 1.0, Honda Civic LXL 1.8 e Yamaha XTZ 250 Lander.</li>
                     <li>Plataformas online como Sodré Santoro e Bradesco facilitam a participação remota, tornando os leilões acessíveis a um público mais amplo.</li>
                 </ul>
             </article>
 
-            <article class="news-item">
-                <h3>Vespa e Piaggio Ampliam Presença no Brasil com Novas Linhas de Scooters</h3>
-                <p>As icônicas marcas italianas Vespa e Piaggio estão reforçando sua presença no mercado brasileiro com a introdução de novos modelos de scooters, que combinam design clássico com tecnologia moderna.</p>
-                <h4>Modelos em Destaque:</h4>
-                <ul>
-                    <li>Vespa: Modelos como a GTS 300 Super, SXL 150 e VXL 150 estão disponíveis com preços a partir de R$ 29.990.</li>
-                    <li>Piaggio: Apresenta modelos como a Beverly 400 S, Liberty 150 e MP3 530, com preços a partir de R$ 32.990.</li>
-                    <li>Ambas as marcas são comercializadas no Brasil pela 2WMotors e promovem a mobilidade sobre duas rodas como uma forma de evolução e estilo de vida.</li>
-                </ul>
-            </article>
-
-            <article class="news-item">
+            <article class="news-item" id="e-investidor">
                 <h3>E-Investidor Lança "Direto da Faria Lima" para Informações de Bastidor Checadas</h3>
+                <p><strong>Autor:</strong> Equipe Portal BM</p>
+                <p><strong>Fonte:</strong> Revista Veja</p>
                 <p>O portal E-Investidor inova ao lançar a nova seção "Direto da Faria Lima", que promete ir além das notícias superficiais, diferenciando "fofoca de mercado" de informações de bastidor checadas diretamente na fonte. A iniciativa visa oferecer conteúdo de maior profundidade e valor para o mercado financeiro.</p>
                 <h4>Conteúdo e Acesso:</h4>
                 <ul>

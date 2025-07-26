@@ -240,3 +240,46 @@ nav ul li a[href="criar_noticia.html"] {
 }
 
 /* ... o restante do seu CSS permanece o mesmo ... */
+
+/* ... seu CSS existente ... */
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #004085;
+    border-radius: 5px;
+}
+
+/* Adicione a nova página de publicação no menu */
+nav ul li a[href="criar_noticia.html"] {
+    /* Opcional: estilo diferente se quiser destacar */
+}
+nav ul li a[href="publicacao_massa.html"] {
+    /* Opcional: estilo diferente se quiser destacar */
+}
+/* Nova linha para Páginas Amarelas */
+nav ul li a[href="paginas_amarelas.html"] {
+    /* Opcional: estilo diferente se quiser destacar */
+}
+
+/* ... o restante do seu CSS permanece o mesmo ... */

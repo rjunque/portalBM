@@ -25,7 +25,7 @@ header p {
     font-size: 1.1em;
 }
 
-/* --- Início da Correção do Banner do Cabeçalho --- */
+/* Formatação do Banner do Cabeçalho */
 .header-banner {
     max-width: 100%; /* Garante que a imagem se ajuste à largura do header */
     height: auto; /* Mantém a proporção da imagem */
@@ -34,7 +34,6 @@ header p {
     border-radius: 8px; /* Cantos arredondados, se desejar */
     box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra suave para destacar */
 }
-/* --- Fim da Correção do Banner do Cabeçalho --- */
 
 
 /* Estilos para o menu no desktop (padrão) */
@@ -79,11 +78,10 @@ header p {
     border-radius: 5px;
 }
 
-/* --- Correção para Ocultar Menus Específicos (já aplicada) --- */
+/* Ocultar Menus Específicos */
 .main-nav ul li .menu-oculto {
     display: none !important; /* !important garante que sobrescreve outras regras */
 }
-/* Fim da Correção para Ocultar Menus Específicos */
 
 
 main {
@@ -204,10 +202,14 @@ footer {
 
 /* --- Media Query para Telas Menores (Celulares) --- */
 @media (max-width: 768px) {
-    /* Oculta o header principal para dar mais espaço no celular */
+    /* O header principal agora será visível no celular */
     header {
-        display: none;
+        display: block; /* Garante que o cabeçalho seja exibido */
+        padding-top: 15px; /* Adiciona um pouco de padding no topo para melhor visualização */
     }
+
+    /* O banner dentro do header já tem as propriedades de max-width e height auto,
+       então ele deve se ajustar automaticamente. */
 
     /* Move o menu para o rodapé */
     .main-nav {
@@ -249,9 +251,11 @@ footer {
         align-items: center; */
     }
 
-    /* Ajuste no conteúdo principal para não ficar por baixo do menu fixo */
+    /* Ajuste no conteúdo principal para não ficar por baixo do menu fixo.
+       Considerando que o cabeçalho agora está visível, o padding-top pode ser necessário. */
     main {
-        padding-bottom: 70px; /* Adiciona um padding na parte inferior do main */
+        padding-bottom: 70px; /* Mantém o padding na parte inferior para o menu fixo */
+        padding-top: 20px; /* Adiciona padding no topo para não colar no header */
     }
 
     /* O footer original pode ser ajustado ou ocultado se necessário no celular */

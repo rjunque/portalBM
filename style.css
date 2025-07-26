@@ -1,6 +1,5 @@
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -8,11 +7,10 @@ body {
 }
 
 header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 1rem 0;
+    background-color: #0056b3;
+    color: white;
+    padding: 20px 0;
     text-align: center;
-    position: relative; /* Para posicionar o banner dentro */
 }
 
 header h1 {
@@ -21,68 +19,42 @@ header h1 {
 }
 
 header p {
-    margin: 5px 0 15px 0;
+    margin: 5px 0 0;
     font-size: 1.1em;
 }
 
-/* Formatação do Banner do Cabeçalho */
-.header-banner {
-    max-width: 100%; /* Garante que a imagem se ajuste à largura do header */
-    height: auto; /* Mantém a proporção da imagem */
-    display: block; /* Remove o espaço extra abaixo da imagem, permite centralizar com margin: auto */
-    margin: 15px auto 0 auto; /* Centraliza horizontalmente e adiciona margem superior */
-    border-radius: 8px; /* Cantos arredondados, se desejar */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra suave para destacar */
-}
-
-
-/* Estilos para o menu no desktop (padrão) */
-.main-nav {
-    background-color: #007bff; /* Cor de fundo padrão para o menu */
+nav {
+    background-color: #007bff;
     padding: 10px 0;
-    width: 100%;
-    /* No desktop, ele fica no fluxo normal do documento */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.main-nav .nav-wrapper {
-    max-width: 1200px; /* Largura máxima para centralizar o conteúdo */
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.main-nav ul {
+nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Para alinhar os itens horizontalmente */
-    justify-content: center; /* Centraliza os itens do menu */
-    flex-wrap: wrap; /* Permite quebrar linha se não couber */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas pequenas */
 }
 
-.main-nav ul li {
-    margin: 0 15px; /* Espaçamento entre os itens do menu */
+nav ul li {
+    margin: 0 15px;
 }
 
-.main-nav ul li a {
+nav ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     padding: 5px 10px;
     transition: background-color 0.3s ease;
-    display: block; /* Para que o padding e hover funcionem em toda a área */
 }
 
-.main-nav ul li a:hover,
-.main-nav ul li a.active {
+nav ul li a:hover,
+nav ul li a.active {
     background-color: #004085;
     border-radius: 5px;
 }
-
-/* Ocultar Menus Específicos */
-.main-nav ul li .menu-oculto {
-    display: none !important; /* !important garante que sobrescreve outras regras */
-}
-
 
 main {
     padding: 20px;
@@ -99,53 +71,89 @@ main {
 }
 
 .main-banner {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .banner-text {
-    margin-top: 15px;
-    font-size: 1.2em;
+    font-style: italic;
     color: #555;
+    margin-top: 15px;
+    font-size: 1.1em;
 }
 
 .category {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .category h2 {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: #0056b3;
+    border-bottom: 2px solid #0056b3;
     padding-bottom: 10px;
     margin-bottom: 20px;
-    font-size: 2em;
+    font-size: 1.8em;
 }
 
-.home-news .news-summary-item {
+.news-item {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.home-news .news-summary-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+.news-item h3 {
+    color: #007bff;
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.news-item p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.news-item ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.news-item li {
+    margin-bottom: 5px;
+}
+
+.news-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.news-item a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para a página inicial (Destaques do Dia) */
+.home-news .news-summary-item {
+    background-color: #f0f8ff; /* Cor mais clara para destaque */
+    border: 1px solid #cceeff;
+    border-left: 5px solid #007bff; /* Borda lateral para destaque */
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .home-news .news-summary-item h3 {
     margin-top: 0;
-    font-size: 1.4em;
-    color: #333;
+    font-size: 1.3em;
 }
 
 .home-news .news-summary-item h3 a {
+    color: #0056b3;
     text-decoration: none;
-    color: #007bff;
 }
 
 .home-news .news-summary-item h3 a:hover {
@@ -155,111 +163,45 @@ main {
 .home-news .news-summary-item p {
     font-size: 0.95em;
     color: #666;
+    line-height: 1.5;
+    margin-bottom: 0;
 }
 
-.news-item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
-.news-item h3 {
-    color: #0056b3;
-    margin-top: 0;
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-.news-item p {
-    margin-bottom: 10px;
-}
-
-.news-item p strong {
-    color: #555;
-}
-
-.news-item ul {
-    list-style: disc;
-    margin-left: 20px;
-    margin-bottom: 10px;
-}
-
-.news-item ul li {
-    margin-bottom: 5px;
-}
 
 footer {
     background-color: #333;
-    color: #fff;
+    color: white;
     text-align: center;
-    padding: 1rem 0;
+    padding: 15px 0;
     margin-top: 30px;
-    position: relative; /* Para o ajuste no celular */
-    width: 100%;
+    font-size: 0.9em;
 }
 
-/* --- Media Query para Telas Menores (Celulares) --- */
+/* Responsividade Básica */
 @media (max-width: 768px) {
-    /* O header principal agora será visível no celular */
-    header {
-        display: block; /* Garante que o cabeçalho seja exibido */
-        padding-top: 15px; /* Adiciona um pouco de padding no topo para melhor visualização */
-    }
-
-    /* O banner dentro do header já tem as propriedades de max-width e height auto,
-       então ele deve se ajustar automaticamente. */
-
-    /* Move o menu para o rodapé */
-    .main-nav {
-        position: fixed; /* Fixa o menu na parte inferior da tela */
-        bottom: 0; /* Alinha na parte de baixo */
-        left: 0;
-        width: 100%;
-        background-color: #007bff; /* Cor de fundo */
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Sombra para destacar */
-        z-index: 1000; /* Garante que fique acima de outros elementos */
-        padding: 0; /* Remove padding vertical */
-    }
-
-    .main-nav .nav-wrapper {
-        padding: 0; /* Remove padding lateral no wrapper */
-    }
-
-    .main-nav ul {
-        justify-content: space-around; /* Distribui os itens uniformemente */
-        padding: 10px 0; /* Padding para os itens dentro do rodapé */
-        flex-wrap: nowrap; /* Impede quebra de linha no rodapé */
-        overflow-x: auto; /* Adiciona scroll horizontal se muitos itens */
-        -webkit-overflow-scrolling: touch; /* Melhor scroll em iOS */
-    }
-
-    .main-nav ul li {
-        margin: 0; /* Remove margens entre os itens para preencher melhor */
-        flex-shrink: 0; /* Impede que os itens encolham */
-        padding: 0 5px; /* Espaçamento interno para os itens */
-    }
-
-    .main-nav ul li a {
-        font-size: 0.75em; /* Reduz o tamanho da fonte para caber mais */
-        padding: 5px 2px; /* Reduz padding dos links */
-        text-align: center;
-        /* Opcional: Para icones, se você for adicionar: */
-        /* display: flex;
+    nav ul {
         flex-direction: column;
-        align-items: center; */
+        align-items: center;
     }
 
-    /* Ajuste no conteúdo principal para não ficar por baixo do menu fixo.
-       Considerando que o cabeçalho agora está visível, o padding-top pode ser necessário. */
+    nav ul li {
+        margin: 5px 0;
+    }
+
     main {
-        padding-bottom: 70px; /* Mantém o padding na parte inferior para o menu fixo */
-        padding-top: 20px; /* Adiciona padding no topo para não colar no header */
+        margin: 10px;
+        padding: 15px;
     }
 
-    /* O footer original pode ser ajustado ou ocultado se necessário no celular */
-    footer {
-        margin-bottom: 60px; /* Ajusta o footer para ficar acima do menu fixo */
+    header h1 {
+        font-size: 2em;
+    }
+
+    .category h2 {
+        font-size: 1.5em;
+    }
+
+    .news-item h3 {
+        font-size: 1.3em;
     }
 }

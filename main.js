@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
             activeNavId = 'nav-amarelas';
             activeFooterId = 'footer-amarelas';
             break;
+        case 'noticias_db.html': // Quando estiver na página de notícia completa
+            // Não ativa um item de menu específico aqui, pois a notícia pode ser de qualquer categoria
+            break;
         default:
             break;
     }
@@ -74,31 +77,45 @@ document.addEventListener('DOMContentLoaded', function() {
             linkElement.parentElement.style.display = 'none'; 
         }
     });
-    // --- FIM DA LÓGICA DO common_scripts.js ---
+    // --- FIM DA LÓGICA DE ATIVAÇÃO DE LINKS ---
 
 
     // --- LÓGICA PARA CARREGAR O HEADER E FOOTER EM TODAS AS PÁGINAS ---
     function loadHeaderAndFooter() {
         fetch('header.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(data => {
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = data;
 
                 // Carrega o menu principal (para desktop)
                 const mainNav = tempDiv.querySelector('.main-nav');
-                if (mainNav) {
-                    // Limpa o placeholder antes de adicionar para evitar duplicação
-                    document.getElementById('main-nav-placeholder').innerHTML = ''; 
-                    document.getElementById('main-nav-placeholder').appendChild(mainNav);
+                const mainNavPlaceholder = document.getElementById('main-nav-placeholder');
+                if (mainNav && mainNavPlaceholder) {
+                    mainNavPlaceholder.innerHTML = ''; 
+                    mainNavPlaceholder.appendChild(mainNav);
+                } else if (!mainNav) {
+                    console.error("Erro: .main-nav não encontrado em header.html");
+                } else if (!mainNavPlaceholder) {
+                    console.error("Erro: #main-nav-placeholder não encontrado no HTML atual.");
                 }
+
 
                 // Carrega o menu do rodapé (para mobile)
                 const footerNav = tempDiv.querySelector('.footer-nav');
-                if (footerNav) {
-                    // Limpa o placeholder antes de adicionar
-                    document.getElementById('footer-nav-placeholder').innerHTML = '';
-                    document.getElementById('footer-nav-placeholder').appendChild(footerNav);
+                const footerNavPlaceholder = document.getElementById('footer-nav-placeholder');
+                if (footerNav && footerNavPlaceholder) {
+                    footerNavPlaceholder.innerHTML = '';
+                    footerNavPlaceholder.appendChild(footerNav);
+                } else if (!footerNav) {
+                    console.error("Erro: .footer-nav não encontrado em header.html");
+                } else if (!footerNavPlaceholder) {
+                    console.error("Erro: #footer-nav-placeholder não encontrado no HTML atual.");
                 }
             })
             .catch(error => console.error('Erro ao carregar o cabeçalho/rodapé:', error));
@@ -106,49 +123,54 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- FIM DA LÓGICA DE CARREGAMENTO DO HEADER/FOOTER ---
 
 
-    // --- LÓGICA ESPECÍFICA DE CADA PÁGINA (Antes eram arquivos JS separados) ---
-    // Usamos 'currentPath' (definido acima) para saber qual lógica executar
-
+    // --- LÓGICA ESPECÍFICA DE CADA PÁGINA ---
     if (currentPath === 'index.html' || currentPath === '') {
-        // Lógica do index_page.js
-        loadHeaderAndFooter(); // Carrega o header/footer primeiro
+        loadHeaderAndFooter(); 
         fetch('noticias_db.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(data => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data, 'text/html');
                 const allNews = doc.querySelectorAll('.news-item-expandable');
                 const newsContainer = document.getElementById('news-container');
 
-                allNews.forEach(newsItem => {
-                    const clonedNewsItem = newsItem.cloneNode(true);
-                    
-                    const dbNavLinks = clonedNewsItem.querySelector('.nav-links');
-                    if (dbNavLinks) {
-                        dbNavLinks.remove();
-                    }
+                if (newsContainer) {
+                    allNews.forEach(newsItem => {
+                        const clonedNewsItem = newsItem.cloneNode(true);
+                        
+                        const dbNavLinks = clonedNewsItem.querySelector('.nav-links');
+                        if (dbNavLinks) {
+                            dbNavLinks.remove(); // Remove links de navegação específicos do DB na Home
+                        }
 
-                    const detailsElement = clonedNewsItem.querySelector('details');
-                    if (detailsElement) {
-                        detailsElement.removeAttribute('open'); // Garante que não tenha o atributo 'open'
+                        const detailsElement = clonedNewsItem.querySelector('details');
+                        if (detailsElement) {
+                            detailsElement.removeAttribute('open'); 
 
-                        const sourceLinkDiv = document.createElement('div');
-                        sourceLinkDiv.classList.add('news-full-link-container');
-                        const sourceLink = document.createElement('a');
-                        sourceLink.href = `noticias_db.html#${newsItem.id}`;
-                        sourceLink.textContent = 'Ver notícia completa';
-                        sourceLinkDiv.appendChild(sourceLink);
+                            const sourceLinkDiv = document.createElement('div');
+                            sourceLinkDiv.classList.add('news-full-link-container');
+                            const sourceLink = document.createElement('a');
+                            sourceLink.href = `noticias_db.html#${newsItem.id}`;
+                            sourceLink.textContent = 'Ver notícia completa';
+                            sourceLinkDiv.appendChild(sourceLink);
 
-                        clonedNewsItem.insertBefore(sourceLinkDiv, detailsElement);
-                    }
-                    newsContainer.appendChild(clonedNewsItem);
-                });
+                            clonedNewsItem.insertBefore(sourceLinkDiv, detailsElement);
+                        }
+                        newsContainer.appendChild(clonedNewsItem);
+                    });
+                } else {
+                    console.error("Erro: #news-container não encontrado na página inicial.");
+                }
             })
             .catch(error => console.error('Erro ao carregar as notícias na página inicial:', error));
 
     } else if (currentPath === 'noticias_db.html') {
-        // Lógica do noticias_db_page.js
-        loadHeaderAndFooter(); // Carrega o header/footer primeiro
+        loadHeaderAndFooter(); 
         
         function displayNewsFromHashLocal() {
             const hash = window.location.hash.substring(1);
@@ -161,7 +183,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 allNewsItems.forEach(item => {
                     if (item.id === hash) {
                         item.style.display = 'block';
-                        item.querySelector('details').open = true; // Mantém aberto para notícia completa
+                        // Abre o details para a notícia completa
+                        const detailsElement = item.querySelector('details');
+                        if (detailsElement) {
+                            detailsElement.open = true; 
+                        }
+                        
                         const newsHeading = item.querySelector('h3');
                         if (newsHeading) {
                             document.title = `Portal BM - ${newsHeading.textContent}`;
@@ -177,12 +204,14 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
 
             if (!foundNews) {
+                // Se a notícia específica não for encontrada, redireciona para a página inicial
                 window.location.href = 'index.html';
             }
 
+            // Adiciona evento ao botão de voltar após um pequeno atraso para garantir que o DOM esteja pronto
             setTimeout(() => {
                 document.querySelectorAll('.news-db-item[style*="display: block"] .db-back-button').forEach(button => {
-                    button.removeEventListener('click', window.handleBackButtonClick);
+                    button.removeEventListener('click', window.handleBackButtonClick); // Evita múltiplos listeners
                     if (typeof window.handleBackButtonClick === 'function') {
                         button.addEventListener('click', window.handleBackButtonClick);
                     } else {
@@ -192,13 +221,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         }
 
+        // Executa a função na carga da página e em mudanças de hash
         displayNewsFromHashLocal();
         window.addEventListener('hashchange', displayNewsFromHashLocal);
 
     } else {
         // Lógica para as páginas de categoria (politica_nacional.html, economia_negocios.html, etc.)
-        // Refatoramos para uma função genérica para evitar repetição massiva
-        loadHeaderAndFooter(); // Carrega o header/footer primeiro
+        loadHeaderAndFooter(); 
 
         let categoryToFilter = '';
         switch (currentPath) {
@@ -221,43 +250,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryToFilter = 'paginas_amarelas';
                 break;
             default:
+                // Para páginas como criar_noticia.html e publicacao_massa.html, não há filtro de notícias.
                 break;
         }
 
         if (categoryToFilter) { // Se for uma página de categoria válida
             fetch('noticias_db.html')
-                .then(response => response.text())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
                 .then(data => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(data, 'text/html');
                     const allNews = doc.querySelectorAll('.news-item-expandable');
                     const newsContainer = document.getElementById('news-container');
 
-                    allNews.forEach(newsItem => {
-                        if (newsItem.dataset.category === categoryToFilter) { 
-                            const clonedNewsItem = newsItem.cloneNode(true);
-                            
-                            const dbNavLinks = clonedNewsItem.querySelector('.nav-links');
-                            if (dbNavLinks) {
-                                dbNavLinks.remove();
+                    if (newsContainer) {
+                        allNews.forEach(newsItem => {
+                            if (newsItem.dataset.category === categoryToFilter) { 
+                                const clonedNewsItem = newsItem.cloneNode(true);
+                                
+                                const dbNavLinks = clonedNewsItem.querySelector('.nav-links');
+                                if (dbNavLinks) {
+                                    dbNavLinks.remove(); // Remove links de navegação específicos do DB na categoria
+                                }
+
+                                const detailsElement = clonedNewsItem.querySelector('details');
+                                if (detailsElement) {
+                                    detailsElement.removeAttribute('open'); 
+
+                                    const sourceLinkDiv = document.createElement('div');
+                                    sourceLinkDiv.classList.add('news-full-link-container');
+                                    const sourceLink = document.createElement('a');
+                                    sourceLink.href = `noticias_db.html#${newsItem.id}`;
+                                    sourceLink.textContent = 'Ver notícia completa';
+                                    sourceLinkDiv.appendChild(sourceLink);
+
+                                    clonedNewsItem.insertBefore(sourceLinkDiv, detailsElement);
+                                }
+                                newsContainer.appendChild(clonedNewsItem);
                             }
-
-                            const detailsElement = clonedNewsItem.querySelector('details');
-                            if (detailsElement) {
-                                detailsElement.removeAttribute('open'); // Garante que não tenha o atributo 'open'
-
-                                const sourceLinkDiv = document.createElement('div');
-                                sourceLinkDiv.classList.add('news-full-link-container');
-                                const sourceLink = document.createElement('a');
-                                sourceLink.href = `noticias_db.html#${newsItem.id}`;
-                                sourceLink.textContent = 'Ver notícia completa';
-                                sourceLinkDiv.appendChild(sourceLink);
-
-                                clonedNewsItem.insertBefore(sourceLinkDiv, detailsElement);
-                            }
-                            newsContainer.appendChild(clonedNewsItem);
-                        }
-                    });
+                        });
+                    } else {
+                        console.error(`Erro: #news-container não encontrado na página de categoria ${categoryToFilter}.`);
+                    }
                 })
                 .catch(error => console.error(`Erro ao carregar notícias para ${categoryToFilter}:`, error));
         }

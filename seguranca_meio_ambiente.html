@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segurança e Meio Ambiente - Portal BM</title>
+    <title>Portal BM - Segurança e Meio Ambiente</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
-    <nav>
+    <nav class="main-nav">
         <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="politica_nacional.html">Política Nacional</a></li>
@@ -21,66 +21,45 @@
             <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
             <li><a href="esportes.html">Esportes</a></li>
             <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
-            <li><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
-            <li><a href="publicacao_massa.html">Publicação em Massa</a></li>
+            <li class="hidden-mobile"><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
+            <li class="hidden-mobile"><a href="publicacao_massa.html">Publicação em Massa</a></li>
         </ul>
     </nav>
 
+    <section class="banner-section">
+        <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank">
+            <img src="Banner.jpg" alt="Banner do Portal BM" class="main-banner">
+        </a>
+        <p class="banner-text">Mantenha-se informado sobre Segurança e Meio Ambiente.</p>
+    </section>
+
     <main>
         <section class="category">
-            <h2>Segurança Pública e Meio Ambiente</h2>
-
+            <h2>Segurança e Meio Ambiente</h2>
             <article class="news-item" id="retrato-do-desespero-gaza">
                 <h3>Imagem da Semana: O Retrato do Desespero na Faixa de Gaza</h3>
-                <img src="https://via.placeholder.com/800x450?text=Imagem+da+Faixa+de+Gaza" alt="Criança na Faixa de Gaza" style="max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px;">
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>A escassez crítica de itens básicos e a devastadora situação humanitária na Faixa de Gaza são vividamente ilustradas pela impactante "Imagem da Semana". A foto capta a profunda angústia e o desespero de crianças em um cenário de conflito e privação, tornando-se um símbolo da crise na região.</p>
-            </article>
-
-            <article class="news-item" id="latrocinios-sp">
-                <h3>Latrocínios Disparam em São Paulo, Enquanto Homicídios Apresentam Queda Desde 2012</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>O estado de São Paulo registrou um preocupante aumento de 44% nos latrocínios no primeiro semestre de 2024, totalizando 96 casos na capital. Esse dado contrasta com a queda de 3% nos homicídios dolosos no mesmo período, uma tendência de diminuição observada desde 2012. O aumento dos roubos seguidos de morte preocupa as autoridades e a população.</p>
-                <h4>Análise e Desafios:</h4>
-                <ul>
-                    <li>Apesar da queda geral nos homicídios, a escalada dos latrocínios indica uma mudança na dinâmica da criminalidade, possivelmente ligada à intensificação de roubos.</li>
-                    <li>Especialistas em segurança pública sugerem que a crise econômica e o aumento do desemprego podem influenciar o crescimento de crimes contra o patrimônio, que por vezes resultam em mortes.</li>
-                    <li>As forças de segurança estão revisando estratégias para combater especificamente esse tipo de crime, focando na prevenção e na rápida elucidação dos casos.</li>
-                </ul>
-            </article>
-
-            <article class="news-item" id="brumadinho">
-                <h3>Nível de Emergência da Barragem de Brumadinho Aumenta Para Risco Iminente</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>A Agência Nacional de Mineração (ANM) elevou o nível de emergência da barragem de B3/B4 da mina Córrego do Feijão, em Brumadinho (MG), para 2. Essa classificação indica uma situação de risco iminente, embora não haja indicação de ruptura imediata, apenas a necessidade de um monitoramento rigoroso.</p>
-                <h4>Impacto na População e Medidas de Prevenção:</h4>
-                <ul>
-                    <li>A elevação do nível de emergência foi motivada pela identificação de anomalias que exigem atenção redobrada e possíveis intervenções.</li>
-                    <li>A medida resultará na retirada de mais de 1.900 pessoas de suas casas nas comunidades de Paracatu, Pompéu e outras áreas próximas à barragem.</li>
-                    <li>A ANM e a defesa civil estão colaborando para monitorar a situação e garantir a segurança da população.</li>
-                </ul>
-            </article>
-
-            <article class="news-item" id="conflitos-tailandia-camboja">
-                <h3>Conflitos Armados Entre Tailândia e Camboja Resultam em Mortes na Fronteira</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Confrontos armados na fronteira entre Tailândia e Camboja provocaram a morte de 12 pessoas, incluindo militares e civis. Os embates, que envolveram o uso de artilharia, geraram o deslocamento de milhares de moradores das regiões afetadas.</p>
-                <h4>Causa e Impactos:</h4>
-                <ul>
-                    <li>A principal causa dos conflitos é uma disputa territorial por uma área que abriga um templo antigo.</li>
-                    <li>Ambos os países se acusam mutuamente de iniciar os ataques e de violar os acordos de cessar-fogo.</li>
-                    <li>A comunidade internacional, incluindo a ONU, tem pedido a contenção e o diálogo entre as partes para resolver a crise.</li>
-                </ul>
+                <p>Por Agência Reuters</p>
+                <p>A escassez de itens básicos e a dramática situação humanitária na Faixa de Gaza são ilustradas pela comovente imagem que se tornou o retrato do desespero em uma região assolada pela crise. A fotografia, capturada por um fotojornalista local, mostra uma criança em meio a escombros, simbolizando a urgência da ajuda internacional.</p>
+                <p>Organizações humanitárias têm alertado para a deterioração das condições de vida, com a falta de água potável, alimentos e medicamentos afetando milhões de pessoas. A imagem serve como um lembrete contundente da necessidade de ações imediatas para aliviar o sofrimento da população e buscar soluções duradouras para o conflito na região.</p>
             </article>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <nav class="footer-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="politica_nacional.html">Política Nacional</a></li>
+                <li><a href="seguranca_meio_ambiente.html" class="active">Segurança e Meio Ambiente</a></li>
+                <li><a href="economia_negocios.html">Economia & Negócios</a></li>
+                <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
+                <li><a href="esportes.html">Esportes</a></li>
+                <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
+                <li class="hidden-desktop"><a href="criar_noticia.html">Publicar Notícia</a></li>
+                <li class="hidden-desktop"><a href="publicacao_massa.html">Publicar Massa</a></li>
+            </ul>
+        </nav>
     </footer>
 </body>
 </html>

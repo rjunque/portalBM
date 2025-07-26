@@ -243,6 +243,15 @@ footer p {
     background-color: #004085;
 }
 
+/* Classes para ocultar itens do menu dependendo do dispositivo */
+.hidden-mobile {
+    display: none; /* Oculta por padrão */
+}
+
+.hidden-desktop {
+    display: none; /* Oculta por padrão */
+}
+
 
 /* Responsividade para Mobile (telas menores ou iguais a 768px) */
 @media (max-width: 768px) {
@@ -287,6 +296,16 @@ footer p {
         margin: 10px auto;
         padding: 0 15px;
     }
+
+    /* Exibe itens escondidos para mobile */
+    .hidden-mobile {
+        display: list-item; /* Ou block, conforme o tipo de elemento */
+    }
+
+    /* Oculta itens destinados apenas a desktop */
+    .hidden-desktop {
+        display: none;
+    }
 }
 
 /* Regras para Desktop (telas maiores que 768px) */
@@ -309,5 +328,15 @@ footer p {
     /* Remove o padding extra do body em desktop */
     body {
         padding-bottom: 0;
+    }
+
+    /* Exibe itens escondidos para desktop */
+    .hidden-desktop {
+        display: list-item; /* Ou block, conforme o tipo de elemento */
+    }
+
+    /* Oculta itens destinados apenas a mobile */
+    .hidden-mobile {
+        display: none;
     }
 }

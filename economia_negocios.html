@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Economia & Negócios - Portal BM</title>
+    <title>Portal BM - Economia & Negócios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Portal BM</h1>
-        <p>As notícias mais importantes do dia, reunidas em um solo lugar.</p>
+        <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
-    <nav>
+    <nav class="main-nav">
         <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="politica_nacional.html">Política Nacional</a></li>
@@ -21,79 +21,46 @@
             <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
             <li><a href="esportes.html">Esportes</a></li>
             <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
-            <li><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
-            <li><a href="publicacao_massa.html">Publicação em Massa</a></li>
+            <li class="hidden-mobile"><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
+            <li class="hidden-mobile"><a href="publicacao_massa.html">Publicação em Massa</a></li>
         </ul>
     </nav>
+
+    <section class="banner-section">
+        <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank">
+            <img src="Banner.jpg" alt="Banner do Portal BM" class="main-banner">
+        </a>
+        <p class="banner-text">As principais notícias de Economia e Negócios.</p>
+    </section>
 
     <main>
         <section class="category">
             <h2>Economia & Negócios</h2>
-
-            <article class="news-item" id="radar-economico">
-                <h3>Radar: Dólar, Inflação e Cenário Econômico Brasileiro</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Notas rápidas sobre os principais indicadores econômicos, incluindo a valorização do dólar, as projeções para a inflação, e a análise de movimentos que impactam o cenário econômico brasileiro.</p>
-            </article>
-
-            <article class="news-item" id="o-rato-que-ruge">
-                <h3>O Rato que Ruge: Impacto das Tarifas Americanas na Economia Brasileira</h3>
-                <p><strong>Autor:</strong> Alexandre Schwartsman</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Artigo de Alexandre Schwartsman que discute o impacto das tarifas comerciais impostas pelos Estados Unidos na economia brasileira. A análise aborda a assimetria de poder entre os dois países e a luta desigual que o Brasil enfrenta para mitigar os efeitos dessas medidas protecionistas.</p>
-            </article>
-
             <article class="news-item" id="missao-dificil-tarifas">
                 <h3>Missão Difícil: Esforços para Conter os Danos do Tarifaço Americano nas Exportações Brasileiras</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Detalhes sobre os complexos e desafiadores esforços diplomáticos e econômicos que o Brasil está empreendendo para conter os danos causados pelas tarifas impostas por Donald Trump sobre produtos brasileiros. A reportagem explora como esses "tarifaços" ameaçam diversos setores exportadores e empresas, e as estratégias adotadas para minimizar o impacto negativo nas cadeias de valor e nos empregos.</p>
-            </article>
-
-            <article class="news-item" id="internet-brasil">
-                <h3>Acesso à Internet no Brasil: Banda Larga Fixa Predomina, mas Desafios Persistem</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>O acesso à internet no Brasil atingiu 98,8% da população em 2023, consolidando a banda larga fixa como a forma mais comum de conexão. Apesar do avanço significativo na conectividade, o país ainda enfrenta desafios em termos de qualidade e infraestrutura em algumas regiões, especialmente as mais remotas ou carentes.</p>
-                <h4>Cenário e Perspectivas:</h4>
-                <ul>
-                    <li>A pesquisa aponta que a maioria dos brasileiros utiliza a internet diariamente para diversas finalidades, desde comunicação e entretenimento até trabalho e estudo.</li>
-                    <li>Apesar da predominância da banda larga fixa, a conectividade móvel também desempenha um papel crucial, especialmente em áreas onde a infraestrutura fixa é limitada.</li>
-                    <li>Os desafios incluem a garantia de acesso de alta qualidade em todo o território nacional, a redução das desigualdades digitais e o investimento contínuo em infraestrutura para suportar a crescente demanda.</li>
-                </ul>
-            </article>
-
-            <article class="news-item" id="leiloes-imoveis-veiculos">
-                <h3>Leilões de Imóveis e Veículos Oferecem Oportunidades Atraentes no Mercado</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Diversos leilões estão sendo realizados no Brasil, apresentando excelentes oportunidades para a aquisição de imóveis e veículos com preços competitivos. Esses eventos atraem tanto investidores em busca de bons negócios quanto compradores finais em procura de bens por valores abaixo do mercado.</p>
-                <h4>Destaques dos Leilões:</h4>
-                <ul>
-                    <li>**Leilão de Imóvel em Guarujá-SP:** Disponível um terreno de 250m² em Santa Cruz, Itatiba/SP, com lances iniciais a partir de R$ 217.710,00 na primeira praça e R$ 167.608,04 na segunda praça. O imóvel está em localização privilegiada, próximo a shopping, escolas e hospitais.</li>
-                    <li>**Leilões de Veículos Bradesco:** Variedade de modelos de carros e motocicletas, incluindo veículos como Fiat Argo Drive 1.0, Honda Civic LXL 1.8 e Yamaha XTZ 250 Lander.</li>
-                    <li>Plataformas online como Sodré Santoro e Bradesco facilitam a participação remota, tornando os leilões acessíveis a um público mais amplo.</li>
-                </ul>
-            </article>
-
-            <article class="news-item" id="e-investidor">
-                <h3>E-Investidor Lança "Direto da Faria Lima" para Informações de Bastidor Checadas</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>O portal E-Investidor inova ao lançar a nova seção "Direto da Faria Lima", que promete ir além das notícias superficiais, diferenciando "fofoca de mercado" de informações de bastidor checadas diretamente na fonte. A iniciativa visa oferecer conteúdo de maior profundidade e valor para o mercado financeiro.</p>
-                <h4>Conteúdo e Acesso:</h4>
-                <ul>
-                    <li>A nova seção disponibilizará entrevistas exclusivas com gestoras, reportagens aprofundadas, análises especiais e estratégias de investimento.</li>
-                    <li>O objetivo é munir os investidores com dados e insights estratégicos que podem fazer a diferença em suas decisões.</li>
-                    <li>A seção pode ser acessada de forma prática via QR Code pelo celular.</li>
-                </ul>
+                <p>Por Fernando Costa (Folha de S.Paulo)</p>
+                <p>Detalhes sobre os complexos esforços para mitigar os impactos das recentes tarifas impostas por Donald Trump sobre produtos brasileiros, que ameaçam diversos setores e empresas exportadoras do país.</p>
+                <p>A equipe econômica brasileira tem trabalhado em diversas frentes, incluindo negociações diplomáticas e busca por novos mercados, para minimizar os prejuízos. Setores como o agronegócio e a indústria manufatureira, que dependem significativamente do mercado americano, estão entre os mais preocupados.</p>
+                <p>Analistas apontam que a situação exige uma estratégia multifacetada, combinando resiliência interna com proatividade na busca por acordos comerciais alternativos.</p>
             </article>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <nav class="footer-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="politica_nacional.html">Política Nacional</a></li>
+                <li><a href="seguranca_meio_ambiente.html">Segurança e Meio Ambiente</a></li>
+                <li><a href="economia_negocios.html" class="active">Economia & Negócios</a></li>
+                <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
+                <li><a href="esportes.html">Esportes</a></li>
+                <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
+                <li class="hidden-desktop"><a href="criar_noticia.html">Publicar Notícia</a></li>
+                <li class="hidden-desktop"><a href="publicacao_massa.html">Publicar Massa</a></li>
+            </ul>
+        </nav>
     </footer>
 </body>
 </html>

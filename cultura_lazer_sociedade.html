@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cultura, Lazer e Sociedade - Portal BM</title>
+    <title>Portal BM - Cultura, Lazer e Sociedade</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
-    <nav>
+    <nav class="main-nav">
         <ul>
             <li><a href="index.html">Início</a></li>
             <li><a href="politica_nacional.html">Política Nacional</a></li>
@@ -21,87 +21,51 @@
             <li><a href="cultura_lazer_sociedade.html" class="active">Cultura, Lazer e Sociedade</a></li>
             <li><a href="esportes.html">Esportes</a></li>
             <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
-            <li><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
-            <li><a href="publicacao_massa.html">Publicação em Massa</a></li>
+            <li class="hidden-mobile"><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
+            <li class="hidden-mobile"><a href="publicacao_massa.html">Publicação em Massa</a></li>
         </ul>
     </nav>
+
+    <section class="banner-section">
+        <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank">
+            <img src="Banner.jpg" alt="Banner do Portal BM" class="main-banner">
+        </a>
+        <p class="banner-text">Notícias sobre Cultura, Lazer e Sociedade.</p>
+    </section>
 
     <main>
         <section class="category">
             <h2>Cultura, Lazer e Sociedade</h2>
-
-            <article class="news-item" id="a-permanencia-da-pobreza">
-                <h3>A Permanência da Pobreza: Uma Nova Consciência para a Erradicação</h3>
-                <p><strong>Autor:</strong> Cristovam Buarque</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Artigo de Cristovam Buarque que aborda a persistência da pobreza e a necessidade de uma nova abordagem para sua erradicação. O autor argumenta que a luta contra a pobreza vai além de soluções meramente econômicas, exigindo uma mudança de mentalidade e políticas sociais mais abrangentes e eficazes.</p>
-            </article>
-
-            <article class="news-item" id="trajetoria-sinuosa-jose-maria-marin">
-                <h3>Datas - Trajetória Sinuosa: José Maria Marin e o Escândalo Fifagate</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>A reportagem recapitula a controversa carreira política e esportiva de José Maria Marin, ex-presidente da CBF, e seu envolvimento no escândalo Fifagate, que abalou o futebol mundial. A trajetória de Marin é marcada por altos cargos e acusações de corrupção, culminando em sua prisão e condenação.</p>
-            </article>
-
-            <article class="news-item" id="um-homem-de-ideias-roberto-duailibi">
-                <h3>Datas - Um Homem de Ideias: Roberto Duailibi e sua Contribuição para a Publicidade Brasileira</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Homenagem a Roberto Duailibi, figura icônica da publicidade brasileira. A matéria destaca sua vasta contribuição para o setor, suas campanhas memoráveis e seu legado como um dos grandes pensadores e inovadores da comunicação no Brasil, influenciando gerações de profissionais.</p>
-            </article>
-
-            <article class="news-item" id="um-legado-de-resiliencia-preta-gil">
-                <h3>Datas - Um Legado de Resiliência: Preta Gil, Carreira e Luta Contra o Câncer</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Uma reportagem emocionante sobre a carreira da cantora Preta Gil, sua influência na música e na cultura, e sua notável luta contra o câncer. A matéria celebra seu legado de resiliência, força e a forma como ela inspira seus fãs e o público em geral diante de adversidades.</p>
-            </article>
-
             <article class="news-item" id="conversa-fabcaro-asterix">
                 <h3>Conversa com Fabcaro: O Novo Roteirista de Asterix e Obelix e a Magia de "A Íris Branca"</h3>
-                <img src="https://via.placeholder.com/800x450?text=Fabcaro+e+Asterix" alt="Fabcaro e Asterix" style="max-width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px;">
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>Entrevista com Fabcaro, o aclamado novo roteirista por trás das aventuras de Asterix e Obelix. Ele compartilha detalhes sobre seu processo criativo no álbum "A Íris Branca" e os desafios e responsabilidades de dar continuidade ao legado de uma das mais icônicas séries de quadrinhos do mundo, mantendo seu humor e espírito originais.</p>
+                <p>Por Isabelle Marat (Le Monde)</p>
+                <p>Fabcaro, o aclamado novo roteirista de Asterix e Obelix, compartilha insights sobre seu trabalho no álbum "A Íris Branca" e os desafios de manter o tone clássico e o humor da icônica série francesa. Em entrevista exclusiva, Fabcaro revelou sua paixão pelos personagens e a responsabilidade de dar continuidade a um legado tão amado.</p>
+                <p>Nesse álbum, Fabcaro explora temas contemporâneos de forma sutil e divertida, provando que Asterix e Obelix continuam relevantes para novas gerações.</p>
             </article>
-
             <article class="news-item" id="culinaria-grega">
                 <h3>Tradição e Modernidade na Culinária Grega em São Paulo: Um Passeio pelos Sabores do Mediterrâneo</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>A cena gastronômica grega em São Paulo oferece uma rica fusão de tradição e modernidade, com estabelecimentos que celebram a riqueza de ingredientes frescos e temperos marcantes, como o Acropolis e Prato Grego. É um convite a um passeio pelos sabores autênticos do Mediterrâneo, sem sair da cidade.</p>
-            </article>
-
-            <article class="news-item" id="vikings-restaurante">
-                <h3>Vikings no Tamanho e na Fartura: Uma Experiência Gastronômica Temática em São Paulo</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>O restaurante Vikings, em São Paulo, proporciona uma experiência gastronômica imersiva que transporta os clientes para a era nórdica, com um ambiente temático e pratos servidos em fartura, remetendo aos banquetes vikings. Desde a decoração até o vestuário dos atendentes, tudo é pensado para criar uma atmosfera autêntica.</p>
-                <h4>Cardápio e Atrações:</h4>
-                <ul>
-                    <li>O cardápio inclui opções como a costelinha com molho barbecue e os pastéis de camarão.</li>
-                    <li>Um dos destaques é o "churrasco viking", uma opção completa para 4 pessoas, disponível por R$ 329,90.</li>
-                    <li>A experiência é complementada por drinks temáticos e a oportunidade de se caracterizar como um viking para fotos.</li>
-                    <li>A unidade principal do restaurante está localizada na Rua Euclides Pacheco, 770, no Tatuapé.</li>
-                </ul>
-            </article>
-
-            <article class="news-item" id="orquestra-heliopolis">
-                <h3>Orquestra Sinfônica Heliópolis em Apresentação Única no Teatro Municipal</h3>
-                <p><strong>Autor:</strong> Equipe Portal BM</p>
-                <p><strong>Fonte:</strong> Revista Veja</p>
-                <p>A Orquestra Sinfônica Heliópolis realizará uma apresentação especial no Teatro Municipal de São Paulo, no dia 30 de julho, às 20h. Este evento oferece uma oportunidade única de apreciar a performance dessa renomada orquestra, conhecida por seu trabalho social e cultural.</p>
-                <h4>Informações sobre o Evento:</h4>
-                <ul>
-                    <li>Os ingressos para a apresentação têm o custo de R$ 40,00 (inteira), com meia-entrada a R$ 20,00.</li>
-                </ul>
+                <p>Por Ana Paula Viveiros (Estadão)</p>
+                <p>A cena gastronômica grega em São Paulo oferece uma rica fusão de tradição e modernidade, com estabelecimentos que celebram a riqueza de ingredientes frescos e temperos marcantes, como o Acropolis e Prato Grego.</p>
+                <p>De pratos clássicos como o Moussaka e Souvlaki, a inovações que reinventam a culinária mediterrânea, os restaurantes gregos da capital paulista convidam a uma viagem de sabores e aromas, proporcionando uma experiência autêntica e inesquecível para os amantes da boa mesa.</p>
             </article>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
+        <nav class="footer-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="politica_nacional.html">Política Nacional</a></li>
+                <li><a href="seguranca_meio_ambiente.html">Segurança e Meio Ambiente</a></li>
+                <li><a href="economia_negocios.html">Economia & Negócios</a></li>
+                <li><a href="cultura_lazer_sociedade.html" class="active">Cultura, Lazer e Sociedade</a></li>
+                <li><a href="esportes.html">Esportes</a></li>
+                <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
+                <li class="hidden-desktop"><a href="criar_noticia.html">Publicar Notícia</a></li>
+                <li class="hidden-desktop"><a href="publicacao_massa.html">Publicar Massa</a></li>
+            </ul>
+        </nav>
     </footer>
 </body>
 </html>

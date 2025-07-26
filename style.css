@@ -283,3 +283,10 @@ nav ul li a[href="paginas_amarelas.html"] {
 }
 
 /* ... o restante do seu CSS permanece o mesmo ... */
+
+
+/* Ocultar menus específicos pelo atributo href */
+nav ul li a[href="criar_noticia.html"],
+nav ul li a[href="publicacao_massa.html"] {
+    display: none;
+}

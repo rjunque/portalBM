@@ -1,3 +1,12 @@
+#!/bin/bash
+
+# Define o diretório do projeto
+OUTPUT_DIR="portal_bm_project"
+
+echo "Atualizando apenas o arquivo style.css no diretório: $OUTPUT_DIR"
+
+# --- style.css ---
+cat << 'EOF' > "$OUTPUT_DIR/style.css"
 /* style.css */
 
 /* Estilos Globais */
@@ -389,3 +398,16 @@ main {
         text-align: center;
     }
 }
+EOF
+
+echo "Arquivo style.css atualizado com sucesso em $OUTPUT_DIR/style.css."
+echo ""
+echo "--- Próximos Passos ---"
+echo ""
+echo "1.  **Limpe o Cache do Navegador:** É essencial fazer um 'Hard Refresh' (Ctrl+Shift+R ou Cmd+Shift+R no Windows/Linux ou Cmd+Shift+R no Mac) no seu navegador para garantir que ele carregue a nova versão do `style.css`."
+echo "2.  **Verifique as Páginas:** Acesse novamente \`http://localhost:8000/index.html\` (ou a página que estiver testando) e verifique se as cores e a formatação voltaram ao normal."
+echo "3.  **Deploy para o GitHub (se já estiver funcionando localmente):** Se você estiver usando o GitHub Pages ou outro serviço, lembre-se de adicionar o `style.css` modificado, fazer o commit e dar um push para o seu repositório."
+echo "    \`cd portal_bm_project\`"
+echo "    \`git add style.css\`"
+echo "    \`git commit -m \"Corrige style.css para restaurar cores e formatacao\"\`"
+echo "    \`git push origin main\`"

@@ -5,8 +5,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: #f4f4f4; /* Fundo cinza claro para o corpo */
+    color: #333; /* Cor de texto padrão */
     line-height: 1.6;
 }
 
@@ -19,8 +19,8 @@ body {
 
 /* Estilos de Cabeçalho */
 header {
-    background-color: #333;
-    color: white;
+    background-color: #333; /* Fundo escuro para o cabeçalho */
+    color: white; /* Texto branco */
     padding: 1rem 0;
     text-align: center;
 }
@@ -60,7 +60,7 @@ header p {
 
 .main-nav ul li a:hover,
 .main-nav ul li a.active {
-    background-color: #555;
+    background-color: #555; /* Fundo ao passar o mouse ou ativo */
 }
 
 /* Oculta o menu do rodapé por padrão (só aparecerá em mobile) */
@@ -70,8 +70,8 @@ header p {
 
 /* Estilos de Rodapé */
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #333; /* Fundo escuro para o rodapé */
+    color: white; /* Texto branco */
     text-align: center;
     padding: 1rem 0;
     margin-top: 2rem; /* Espaçamento entre o conteúdo principal e o rodapé */
@@ -105,14 +105,14 @@ footer p {
 
 .footer-nav ul li a:hover,
 .footer-nav ul li a.active {
-    background-color: #555;
+    background-color: #555; /* Fundo ao passar o mouse ou ativo */
 }
 
 /* Estilos do Banner */
 .banner-section {
     text-align: center;
     padding: 20px;
-    background-color: #fff;
+    background-color: #fff; /* Fundo branco para o banner */
     border-bottom: 1px solid #ddd;
 }
 
@@ -134,7 +134,7 @@ main {
     padding: 20px;
     max-width: 1200px;
     margin: 20px auto;
-    background-color: #fff;
+    background-color: #fff; /* Fundo branco para o conteúdo principal */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
@@ -149,7 +149,7 @@ main {
 
 /* Estilos das Notícias (Expandable - Resumo e Completo) */
 .news-item-expandable {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9; /* Fundo cinza claro para cada notícia */
     border: 1px solid #ddd;
     border-radius: 8px;
     margin-bottom: 15px;
@@ -160,7 +160,7 @@ main {
 .news-item-expandable summary {
     cursor: pointer;
     padding: 15px;
-    background-color: #eee;
+    background-color: #eee; /* Fundo cinza para o cabeçalho expansível */
     font-weight: bold;
     border-bottom: 1px solid #ddd;
     display: block; /* Garante que toda a área da summary é clicável */
@@ -184,7 +184,7 @@ main {
 
 .news-item-expandable h3 {
     margin: 0 0 5px 0;
-    color: #0056b3;
+    color: #0056b3; /* Cor azul para o título da notícia */
     font-size: 1.3rem;
     display: inline-block; /* Para que a seta não afete o título */
 }
@@ -213,14 +213,14 @@ main {
 .news-item-expandable .news-full-link-container {
     text-align: right;
     padding: 10px 15px 5px;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Fundo para o container do link */
     border-top: 1px solid #ddd;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
 
 .news-item-expandable .news-full-link-container a {
-    color: #007bff;
+    color: #007bff; /* Cor azul para o link "Ver notícia completa" */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
@@ -257,7 +257,7 @@ main {
 
 .news-db-item .nav-links .db-back-button,
 .news-db-item .nav-links .db-back-home-button {
-    background-color: #007bff;
+    background-color: #007bff; /* Cor azul para os botões de navegação */
     color: white;
     padding: 10px 15px;
     border: none;

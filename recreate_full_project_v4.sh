@@ -3,6 +3,7 @@
 # Define o diretório onde os arquivos serão criados
 OUTPUT_DIR="portal_bm_project"
 
+echo "Iniciando a recriação completa do projeto web..."
 echo "Criando diretório do projeto: $OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 if [ $? -ne 0 ]; then
@@ -10,6 +11,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# --- style.css ---
 echo "Gerando style.css..."
 cat << 'EOF' > "$OUTPUT_DIR/style.css"
 /* style.css */
@@ -405,6 +407,7 @@ main {
 }
 EOF
 
+# --- main.js ---
 echo "Gerando main.js..."
 cat << 'EOF' > "$OUTPUT_DIR/main.js"
 // main.js
@@ -430,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     switch (currentPath) {
         case 'index.html':
-        case '':
+        case '': // Para quando a URL é apenas o domínio (ex: localhost:8000/)
             activeNavId = 'nav-inicio';
             activeFooterId = 'footer-inicio';
             break;
@@ -458,10 +461,11 @@ document.addEventListener('DOMContentLoaded', function() {
             activeNavId = 'nav-amarelas';
             activeFooterId = 'footer-amarelas';
             break;
-        case 'noticias_db.html': // Quando estiver na página de notícia completa
-            // Não ativa um item de menu específico aqui, pois a notícia pode ser de qualquer categoria
+        case 'noticias_db.html': 
+            // Esta página carrega uma notícia específica, não um item de menu fixo.
             break;
         default:
+            // Para páginas de administração, por exemplo, não ativa menu
             break;
     }
 
@@ -478,11 +482,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Ocultar sempre os links de administração
+    // Ocultar sempre os links de administração (Criar Notícia, Publicação em Massa)
     const adminLinks = ['nav-criar', 'nav-massa', 'footer-criar', 'footer-massa'];
     adminLinks.forEach(id => {
         const linkElement = document.getElementById(id);
         if (linkElement) {
+            // Acessa o elemento pai (o <li>) e define seu display como 'none'
             linkElement.parentElement.style.display = 'none'; 
         }
     });
@@ -508,12 +513,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (mainNav && mainNavPlaceholder) {
                     mainNavPlaceholder.innerHTML = ''; 
                     mainNavPlaceholder.appendChild(mainNav);
-                } else if (!mainNav) {
-                    console.error("Erro: .main-nav não encontrado em header.html");
-                } else if (!mainNavPlaceholder) {
-                    console.error("Erro: #main-nav-placeholder não encontrado no HTML atual.");
+                } else {
+                    console.warn("Elemento .main-nav ou #main-nav-placeholder não encontrado. Menus podem não carregar.");
                 }
-
 
                 // Carrega o menu do rodapé (para mobile)
                 const footerNav = tempDiv.querySelector('.footer-nav');
@@ -521,10 +523,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (footerNav && footerNavPlaceholder) {
                     footerNavPlaceholder.innerHTML = '';
                     footerNavPlaceholder.appendChild(footerNav);
-                } else if (!footerNav) {
-                    console.error("Erro: .footer-nav não encontrado em header.html");
-                } else if (!footerNavPlaceholder) {
-                    console.error("Erro: #footer-nav-placeholder não encontrado no HTML atual.");
+                } else {
+                    console.warn("Elemento .footer-nav ou #footer-nav-placeholder não encontrado. Menus podem não carregar.");
                 }
             })
             .catch(error => console.error('Erro ao carregar o cabeçalho/rodapé:', error));
@@ -545,22 +545,28 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(data, 'text/html');
-                const allNews = doc.querySelectorAll('.news-item-expandable');
+                const allNews = doc.querySelectorAll('.news-item-expandable'); // Seleciona todas as notícias expansíveis
                 const newsContainer = document.getElementById('news-container');
 
                 if (newsContainer) {
                     allNews.forEach(newsItem => {
                         const clonedNewsItem = newsItem.cloneNode(true);
                         
+                        // REMOVER A CLASSE 'news-db-item' DO ITEM CLONADO NA HOME
+                        clonedNewsItem.classList.remove('news-db-item');
+
+                        // Remove links de navegação específicos do DB na Home
                         const dbNavLinks = clonedNewsItem.querySelector('.nav-links');
                         if (dbNavLinks) {
-                            dbNavLinks.remove(); // Remove links de navegação específicos do DB na Home
+                            dbNavLinks.remove(); 
                         }
 
+                        // Garante que a notícia não venha aberta por padrão na home
                         const detailsElement = clonedNewsItem.querySelector('details');
                         if (detailsElement) {
                             detailsElement.removeAttribute('open'); 
 
+                            // Adiciona o link "Ver notícia completa"
                             const sourceLinkDiv = document.createElement('div');
                             sourceLinkDiv.classList.add('news-full-link-container');
                             const sourceLink = document.createElement('a');
@@ -568,6 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             sourceLink.textContent = 'Ver notícia completa';
                             sourceLinkDiv.appendChild(sourceLink);
 
+                            // Insere o link antes do elemento <details>
                             clonedNewsItem.insertBefore(sourceLinkDiv, detailsElement);
                         }
                         newsContainer.appendChild(clonedNewsItem);
@@ -582,16 +589,16 @@ document.addEventListener('DOMContentLoaded', function() {
         loadHeaderAndFooter(); 
         
         function displayNewsFromHashLocal() {
-            const hash = window.location.hash.substring(1);
-            const allNewsItems = document.querySelectorAll('.news-db-item');
-            const newsTitle = document.getElementById('full-news-title');
+            const hash = window.location.hash.substring(1); // Pega o ID da URL (#noticia-lula-trump)
+            const allNewsItems = document.querySelectorAll('.news-db-item'); // Aqui, queremos APENAS as do DB
+            const newsTitleElement = document.getElementById('full-news-title');
             
             let foundNews = false;
 
             if (hash) {
                 allNewsItems.forEach(item => {
                     if (item.id === hash) {
-                        item.style.display = 'block';
+                        item.style.display = 'block'; // Mostra apenas a notícia correspondente
                         // Abre o details para a notícia completa
                         const detailsElement = item.querySelector('details');
                         if (detailsElement) {
@@ -600,20 +607,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         const newsHeading = item.querySelector('h3');
                         if (newsHeading) {
-                            document.title = `Portal BM - ${newsHeading.textContent}`;
-                            if (newsTitle) {
-                                newsTitle.textContent = newsHeading.textContent;
+                            document.title = `Portal BM - ${newsHeading.textContent}`; // Atualiza o título da aba
+                            if (newsTitleElement) {
+                                newsTitleElement.textContent = newsHeading.textContent; // Atualiza o H2 da página
                             }
                         }
                         foundNews = true;
                     } else {
-                        item.style.display = 'none';
+                        item.style.display = 'none'; // Esconde as outras notícias
                     }
                 });
             } 
 
             if (!foundNews) {
-                // Se a notícia específica não for encontrada, redireciona para a página inicial
+                // Se nenhuma notícia específica for encontrada, redireciona para a página inicial
+                console.warn(`Notícia com ID '${hash}' não encontrada. Redirecionando para a página inicial.`);
                 window.location.href = 'index.html';
             }
 
@@ -660,7 +668,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             default:
                 // Para páginas como criar_noticia.html e publicacao_massa.html, não há filtro de notícias.
-                break;
+                // Não faça nada aqui para não tentar carregar notícias nessas páginas.
+                return; // Sai da função para não tentar carregar notícias
         }
 
         if (categoryToFilter) { // Se for uma página de categoria válida
@@ -682,15 +691,21 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (newsItem.dataset.category === categoryToFilter) { 
                                 const clonedNewsItem = newsItem.cloneNode(true);
                                 
+                                // REMOVER A CLASSE 'news-db-item' DO ITEM CLONADO NA CATEGORIA
+                                clonedNewsItem.classList.remove('news-db-item');
+
+                                // Remove links de navegação específicos do DB na categoria
                                 const dbNavLinks = clonedNewsItem.querySelector('.nav-links');
                                 if (dbNavLinks) {
-                                    dbNavLinks.remove(); // Remove links de navegação específicos do DB na categoria
+                                    dbNavLinks.remove(); 
                                 }
 
+                                // Garante que a notícia não venha aberta por padrão na categoria
                                 const detailsElement = clonedNewsItem.querySelector('details');
                                 if (detailsElement) {
                                     detailsElement.removeAttribute('open'); 
 
+                                    // Adiciona o link "Ver notícia completa"
                                     const sourceLinkDiv = document.createElement('div');
                                     sourceLinkDiv.classList.add('news-full-link-container');
                                     const sourceLink = document.createElement('a');
@@ -698,6 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     sourceLink.textContent = 'Ver notícia completa';
                                     sourceLinkDiv.appendChild(sourceLink);
 
+                                    // Insere o link antes do elemento <details>
                                     clonedNewsItem.insertBefore(sourceLinkDiv, detailsElement);
                                 }
                                 newsContainer.appendChild(clonedNewsItem);
@@ -713,6 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 EOF
 
+# --- header.html ---
 echo "Gerando header.html..."
 cat << 'EOF' > "$OUTPUT_DIR/header.html"
 <nav class="main-nav">
@@ -744,6 +761,7 @@ cat << 'EOF' > "$OUTPUT_DIR/header.html"
 </nav>
 EOF
 
+# --- noticias_db.html (DB para a página completa e carregamento dinâmico) ---
 echo "Gerando noticias_db.html..."
 cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
 <!DOCTYPE html>
@@ -752,21 +770,22 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notícias DB - Portal BM</title>
-    </head>
+    <link rel="stylesheet" href="style.css"> 
+</head>
 <body>
     <article class="news-item-expandable news-db-item" id="noticia-lula-trump" data-category="politica_nacional">
         <details>
             <summary>
                 <h3>Lula Cogita Encontro com Trump para Preservar Relações Comerciais</h3>
-                <p class="meta-info">Por Mariana Reis (O Globo)</p>
+                <p class="meta-info">Publicado em 26 de julho de 2025 - Por **Mariana Reis** (O Globo)</p>
                 <p class="summary-text">O presidente Luiz Inácio Lula da Silva está avaliando a possibilidade de um encontro com o ex-presidente dos Estados Unidos, Donald Trump, caso este retorne à Casa Branca, visando preservar relações comerciais e econômicas estratégicas para o Brasil.</p>
             </summary>
             <div class="news-content">
-                <p>A medida, considerada pragimática, busca assegurar que a relação bilateral não seja prejudicada por divergências ideológicas. Fontes do Itamaraty indicam que o governo brasileiro está monitorando de perto o cenário eleitoral americano e se preparando para qualquer desfecho, priorizando os interesses econômicos e comerciais do país.</p>
+                <p>A medida, considerada pragmática, busca assegurar que a relação bilateral não seja prejudicada por divergências ideológicas. Fontes do Itamaraty indicam que o governo brasileiro está monitorando de perto o cenário eleitoral americano e se preparando para qualquer desfecho, priorizando os interesses econômicos e comerciais do país.</p>
                 <p>Um eventual encontro demonstraria a disposição do Brasil em manter uma política externa de Estado, capaz de dialogar com diferentes espectros políticos globais em benefício do desenvolvimento nacional.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button> 
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button> 
                 </div>
             </div>
         </details>
@@ -776,7 +795,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Conversa com Fabcaro: O Novo Roteirista de Asterix e Obelix e a Magia de "A Íris Branca"</h3>
-                <p class="meta-info">Por Isabelle Marat (Le Monde)</p>
+                <p class="meta-info">Publicado em 25 de julho de 2025 - Por **Isabelle Marat** (Le Monde)</p>
                 <p class="summary-text">Fabcaro, o aclamado novo roteirista de Asterix e Obelix, compartilha insights sobre seu trabalho no álbum "A Íris Branca" e os desafios de manter o tone clássico e o humor da icônica série francesa.</p>
             </summary>
             <div class="news-content">
@@ -784,7 +803,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
                 <p>Nesse álbum, Fabcaro explora temas contemporâneos de forma sutil e divertida, provando que Asterix e Obelix continuam relevantes para novas gerações.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -794,7 +813,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Missão Difícil: Esforços para Conter os Danos do Tarifaço Americano nas Exportações Brasileiras</h3>
-                <p class="meta-info">Por Fernando Costa (Folha de S.Paulo)</p>
+                <p class="meta-info">Publicado em 24 de julho de 2025 - Por **Fernando Costa** (Folha de S.Paulo)</p>
                 <p class="summary-text">Detalhes sobre os complexos esforços para mitigar os impactos das recentes tarifas impostas por Donald Trump sobre produtos brasileiros, que ameaçam diversos setores e empresas exportadoras do país.</p>
             </summary>
             <div class="news-content">
@@ -802,7 +821,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
                 <p>Analistas apontam que a situação exige uma estratégia multifacetada, combinando resiliência interna com proatividade na busca por acordos comerciais alternativos.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -812,7 +831,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>O Veneno da Polarização no Brasil: Reflexões sobre o Debate Nacional</h3>
-                <p class="meta-info">Por João Almeida</p>
+                <p class="meta-info">Publicado em 23 de julho de 2025 - Por **João Almeida**</p>
                 <p class="summary-text">A polarização política no Brasil continua a ser um obstáculo significativo para o debate construtivo sobre questões cruciais do país, afetando a capacidade de encontrar soluções e gerar consenso entre diferentes setores da sociedade.</p>
             </summary>
             <div class="news-content">
@@ -820,7 +839,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
                 <p>A consequência direta é a paralisia em pautas importantes e a dificuldade em construir pontes. A superação desse desafio exige um esforço conjunto de lideranças políticas, meios de comunicação e da própria sociedade civil para promover a tolerância, o respeito às diferenças e a valorização do debate baseado em fatos.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -830,22 +849,22 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Entrevista Exclusiva com David Ricks: O "Doutor Mounjaro" e a Luta Contra a Obesidade</h3>
-                <p class="meta-info">Por Revista Veja</p>
+                <p class="meta-info">Publicado em 22 de julho de 2025 - Por **Revista Veja**</p>
                 <p class="summary-text">O CEO da Eli Lilly, David Ricks, conhecido como "Doutor Mounjaro", detalha os planos ambiciosos da farmacêutica para erradicar a obesidade e sua busca incessante por medicamentos inovadores, incluindo uma promissora droga para Alzheimer.</p>
             </summary>
             <div class="news-content">
                 <p>Na entrevista exclusiva, Ricks discute a importância de abordagens multifacetadas para a obesidade, combinando medicação com mudanças no estilo de vida. Ele também compartilha insights sobre os desafios e as oportunidades no desenvolvimento de novas terapias para doenças crônicas, e a visão da Eli Lilly para o futuro da saúde global.</p>
                 <h4>Principais pontos da entrevista:</h4>
                 <ul>
-                    <li>Mounjaro e Zepbound: Ricks enfatiza o impacto dessas drogas no tratamento da obesidade e diabetes tipo 2, destacando que elas são mais do que "medicamentos para emagrecer", mas sim para tratar uma doença crônica complexa.</li>
-                    <li>Estratégia de Longo Prazo: A Eli Lilly está comprometida com a pesquisa e desenvolvimento contínuos de novas moléculas para obesidade, com o objetivo de oferecer opções mais variadas e eficazes.</li>
-                    <li>Pesquisa em Alzheimer: Embora o foco principal seja obesidade, a empresa tem uma droga promissora em testes para Alzheimer, o que demonstra a amplitude de sua pesquisa farmacêutica. Ricks ressalta a importância de encontrar soluções para doenças neurodegenerativas.</li>
-                    <li>Acessibilidade e Preço: A entrevista aborda os desafios de acessibilidade e o custo dos novos medicamentos, e a Eli Lilly está buscando estratégias para tornar as terapias mais amplamente disponíveis.</li>
-                    <li>Inovação e Futuro: Ricks expressa otimismo sobre o futuro da medicina e a capacidade da indústria farmacêutica de transformar a vida das pessoas, através da ciência e da inovação contínua.</li>
+                    <li>**Mounjaro e Zepbound:** Ricks enfatiza o impacto dessas drogas no tratamento da obesidade e diabetes tipo 2, destacando que elas são mais do que "medicamentos para emagrecer", mas sim para tratar uma doença crônica complexa.</li>
+                    <li>**Estratégia de Longo Prazo:** A Eli Lilly está comprometida com a pesquisa e desenvolvimento contínuos de novas moléculas para obesidade, com o objetivo de oferecer opções mais variadas e eficazes.</li>
+                    <li>**Pesquisa em Alzheimer:** Embora o foco principal seja obesidade, a empresa tem uma droga promissora em testes para Alzheimer, o que demonstra a amplitude de sua pesquisa farmacêutica. Ricks ressalta a importância de encontrar soluções para doenças neurodegenerativas.</li>
+                    <li>**Acessibilidade e Preço:** A entrevista aborda os desafios de acessibilidade e o custo dos novos medicamentos, e a Eli Lilly está buscando estratégias para tornar as terapias mais amplamente disponíveis.</li>
+                    <li>**Inovação e Futuro:** Ricks expressa otimismo sobre o futuro da medicina e a capacidade da indústria farmacêutica de transformar a vida das pessoas, através da ciência e da inovação contínua.</li>
                 </ul>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -855,7 +874,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Imagem da Semana: O Retrato do Desespero na Faixa de Gaza</h3>
-                <p class="meta-info">Por Agência Reuters</p>
+                <p class="meta-info">Publicado em 21 de julho de 2025 - Por **Agência Reuters**</p>
                 <p class="summary-text">A escassez de itens básicos e a dramática situação humanitária na Faixa de Gaza é ilustrada pela comovente imagem que se tornou o retrato do desespero em uma região assolada pela crise.</p>
             </summary>
             <div class="news-content">
@@ -863,7 +882,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
                 <p>Organizações humanitárias têm alertado para a deterioração das condições de vida, com a falta de água potável, alimentos e medicamentos afetando milhões de pessoas. A imagem serve como um lembrete contundente da necessidade de ações imediatas para aliviar o sofrimento da população e buscar soluções duradouras para o conflito na região.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -873,14 +892,14 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Tradição e Modernidade na Culinária Grega em São Paulo: Um Passeio pelos Sabores do Mediterrâneo</h3>
-                <p class="meta-info">Por Ana Paula Viveiros (Estadão)</p>
+                <p class="meta-info">Publicado em 20 de julho de 2025 - Por **Ana Paula Viveiros** (Estadão)</p>
                 <p class="summary-text">A cena gastronômica grega em São Paulo oferece uma rica fusão de tradição e modernidade, com estabelecimentos que celebram a riqueza de ingredientes frescos e temperos marcantes, como o Acropolis e Prato Grego.</p>
             </summary>
             <div class="news-content">
                 <p>De pratos clássicos como o Moussaka e Souvlaki, a inovações que reinventam a culinária mediterrânea, os restaurantes gregos da capital paulista convidam a uma viagem de sabores e aromas, proporcionando uma experiência autêntica e inesquecível para os amantes da boa mesa.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -890,14 +909,14 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Olimpíadas de Paris: Expectativas para as medalhas brasileiras</h3>
-                <p class="meta-info">Por Maria Clara Pires (GE)</p>
+                <p class="meta-info">Publicado em 19 de julho de 2025 - Por **Maria Clara Pires** (GE)</p>
                 <p class="summary-text">Com a proximidade dos Jogos Olímpicos de Paris, a delegação brasileira intensifica os treinos e a preparação final. As expectativas são altas em diversas modalidades, com atletas buscando superar seus próprios recordes e trazer medalhas para casa.</p>
             </summary>
             <div class="news-content">
                 <p>Nesta análise, destacamos os esportes e os atletas com maior potencial de pódio, considerando o desempenho recente em competições internacionais e o nível de preparação. A torcida brasileira se prepara para vibrar a cada prova.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -907,7 +926,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Brasileirão: Análise dos favoritos e surpresas da rodada</h3>
-                <p class="meta-info">Por Lucas Silva (Lance!)</p>
+                <p class="meta-info">Publicado em 18 de julho de 2025 - Por **Lucas Silva** (Lance!)</p>
                 <p class="summary-text">Com o campeonato pegando fogo, a última rodada do Brasileirão trouxe resultados inesperados e consolidou a posição de alguns favoritos ao título.</p>
             </summary>
             <div class="news-content">
@@ -915,7 +934,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
                 <p>Times que vinham em baixa conseguiram reverter o quadro, enquanto gigantes tropeçaram, deixando o cenário ainda mais imprevisível. A briga pela liderança e contra o rebaixamento promete emoção até o fim.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
@@ -925,7 +944,7 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
         <details>
             <summary>
                 <h3>Perfil: Maria Silva, a Influenciadora que Transformou a Jardinagem em Paixão Nacional</h3>
-                <p class="meta-info">Por Júlia Martins (Casa e Jardim)</p>
+                <p class="meta-info">Publicado em 17 de julho de 2025 - Por **Júlia Martins** (Casa e Jardim)</p>
                 <p class="summary-text">Conheça a história de Maria Silva, a influenciadora digital que saiu do anonimato para se tornar a voz da jardinagem no Brasil.</p>
             </summary>
             <div class="news-content">
@@ -933,15 +952,17 @@ cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
                 <p>Em sua entrevista exclusiva, Maria compartilha sua jornada, desde o primeiro vaso de suculentas até o império digital que construiu. Ela discute a importância da conexão com a natureza, os desafios de ser uma criadora de conteúdo e seus planos futuros para expandir seu alcance e impactar ainda mais vidas.</p>
                 <div class="nav-links">
                     <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                    <button class="db-back-button">Voltar para a Página Anterior</button>
+                    <button class="db-back-button" onclick="handleBackButtonClick(event)">Voltar para a Página Anterior</button>
                 </div>
             </div>
         </details>
     </article>
+    <script src="main.js"></script> 
 </body>
 </html>
 EOF
 
+# --- index.html ---
 echo "Gerando index.html..."
 cat << 'EOF' > "$OUTPUT_DIR/index.html"
 <!DOCTYPE html>
@@ -986,6 +1007,7 @@ cat << 'EOF' > "$OUTPUT_DIR/index.html"
 </html>
 EOF
 
+# --- politica_nacional.html ---
 echo "Gerando politica_nacional.html..."
 cat << 'EOF' > "$OUTPUT_DIR/politica_nacional.html"
 <!DOCTYPE html>
@@ -1028,6 +1050,7 @@ cat << 'EOF' > "$OUTPUT_DIR/politica_nacional.html"
 </html>
 EOF
 
+# --- economia_negocios.html ---
 echo "Gerando economia_negocios.html..."
 cat << 'EOF' > "$OUTPUT_DIR/economia_negocios.html"
 <!DOCTYPE html>
@@ -1070,6 +1093,7 @@ cat << 'EOF' > "$OUTPUT_DIR/economia_negocios.html"
 </html>
 EOF
 
+# --- cultura_lazer_sociedade.html ---
 echo "Gerando cultura_lazer_sociedade.html..."
 cat << 'EOF' > "$OUTPUT_DIR/cultura_lazer_sociedade.html"
 <!DOCTYPE html>
@@ -1112,6 +1136,7 @@ cat << 'EOF' > "$OUTPUT_DIR/cultura_lazer_sociedade.html"
 </html>
 EOF
 
+# --- esportes.html ---
 echo "Gerando esportes.html..."
 cat << 'EOF' > "$OUTPUT_DIR/esportes.html"
 <!DOCTYPE html>
@@ -1154,6 +1179,7 @@ cat << 'EOF' > "$OUTPUT_DIR/esportes.html"
 </html>
 EOF
 
+# --- seguranca_meio_ambiente.html ---
 echo "Gerando seguranca_meio_ambiente.html..."
 cat << 'EOF' > "$OUTPUT_DIR/seguranca_meio_ambiente.html"
 <!DOCTYPE html>
@@ -1196,6 +1222,7 @@ cat << 'EOF' > "$OUTPUT_DIR/seguranca_meio_ambiente.html"
 </html>
 EOF
 
+# --- paginas_amarelas.html ---
 echo "Gerando paginas_amarelas.html..."
 cat << 'EOF' > "$OUTPUT_DIR/paginas_amarelas.html"
 <!DOCTYPE html>
@@ -1238,6 +1265,7 @@ cat << 'EOF' > "$OUTPUT_DIR/paginas_amarelas.html"
 </html>
 EOF
 
+# --- criar_noticia.html ---
 echo "Gerando criar_noticia.html..."
 cat << 'EOF' > "$OUTPUT_DIR/criar_noticia.html"
 <!DOCTYPE html>
@@ -1273,6 +1301,7 @@ cat << 'EOF' > "$OUTPUT_DIR/criar_noticia.html"
 </html>
 EOF
 
+# --- publicacao_massa.html ---
 echo "Gerando publicacao_massa.html..."
 cat << 'EOF' > "$OUTPUT_DIR/publicacao_massa.html"
 <!DOCTYPE html>
@@ -1308,235 +1337,27 @@ cat << 'EOF' > "$OUTPUT_DIR/publicacao_massa.html"
 </html>
 EOF
 
-echo "Gerando o arquivo de página de notícia completa (noticias_db.html)..."
-cat << 'EOF' > "$OUTPUT_DIR/noticias_db.html"
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal BM - Notícia Completa</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Portal BM</h1>
-        <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
-    </header>
-
-    <div id="main-nav-placeholder"></div>
-
-    <main>
-        <section class="category full-news-display">
-            <h2 id="full-news-title">Notícia Completa</h2> 
-            
-            <div id="full-news-container">
-                <article class="news-item-expandable news-db-item" id="noticia-lula-trump" data-category="politica_nacional">
-                    <details>
-                        <summary>
-                            <h3>Lula Cogita Encontro com Trump para Preservar Relações Comerciais</h3>
-                            <p class="meta-info">Por Mariana Reis (O Globo)</p>
-                            <p class="summary-text">O presidente Luiz Inácio Lula da Silva está avaliando a possibilidade de um encontro com o ex-presidente dos Estados Unidos, Donald Trump, caso este retorne à Casa Branca, visando preservar relações comerciais e econômicas estratégicas para o Brasil.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>A medida, considerada pragimática, busca assegurar que a relação bilateral não seja prejudicada por divergências ideológicas. Fontes do Itamaraty indicam que o governo brasileiro está monitorando de perto o cenário eleitoral americano e se preparando para qualquer desfecho, priorizando os interesses econômicos e comerciais do país.</p>
-                            <p>Um eventual encontro demonstraria a disposição do Brasil em manter uma política externa de Estado, capaz de dialogar com diferentes espectros políticos globais em benefício do desenvolvimento nacional.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button> 
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-fabcaro-asterix" data-category="cultura_lazer_sociedade">
-                    <details>
-                        <summary>
-                            <h3>Conversa com Fabcaro: O Novo Roteirista de Asterix e Obelix e a Magia de "A Íris Branca"</h3>
-                            <p class="meta-info">Por Isabelle Marat (Le Monde)</p>
-                            <p class="summary-text">Fabcaro, o aclamado novo roteirista de Asterix e Obelix, compartilha insights sobre seu trabalho no álbum "A Íris Branca" e os desafios de manter o tone clássico e o humor da icônica série francesa.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>Em entrevista exclusiva, Fabcaro revelou sua paixão pelos personagens e a responsabilidade de dar continuidade a um legado tão amado.</p>
-                            <p>Nesse álbum, Fabcaro explora temas contemporâneos de forma sutil e divertida, provando que Asterix e Obelix continuam relevantes para novas gerações.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-tarifas-eua" data-category="economia_negocios">
-                    <details>
-                        <summary>
-                            <h3>Missão Difícil: Esforços para Conter os Danos do Tarifaço Americano nas Exportações Brasileiras</h3>
-                            <p class="meta-info">Por Fernando Costa (Folha de S.Paulo)</p>
-                            <p class="summary-text">Detalhes sobre os complexos esforços para mitigar os impactos das recentes tarifas impostas por Donald Trump sobre produtos brasileiros, que ameaçam diversos setores e empresas exportadoras do país.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>A equipe econômica brasileira tem trabalhado em diversas frentes, incluindo negociações diplomáticas e busca por novos mercados, para minimizar os prejuízos. Setores como o agronegócio e a indústria manufatureira, que dependem significativamente do mercado americano, estão entre os mais preocupados.</p>
-                            <p>Analistas apontam que a situação exige uma estratégia multifacetada, combinando resiliência interna com proatividade na busca por acordos comerciais alternativos.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-polarizacao-brasil" data-category="politica_nacional">
-                    <details>
-                        <summary>
-                            <h3>O Veneno da Polarização no Brasil: Reflexões sobre o Debate Nacional</h3>
-                            <p class="meta-info">Por João Almeida</p>
-                            <p class="summary-text">A polarização política no Brasil continua a ser um obstáculo significativo para o debate construtivo sobre questões cruciais do país, afetando a capacidade de encontrar soluções e gerar consenso entre diferentes setores da sociedade.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>Recentemente, especialistas têm apontado para a intensificação dos discursos extremos, tanto à direita quanto à esquerda, o que tem dificultado a formação de um ambiente propício para discussões democráticas e inclusivas. A disseminação de notícias falsas e a tribalização das redes sociais contribuem para esse cenário, onde o diálogo é substituído por ataques pessoais e desqualificação do oponente.</p>
-                            <p>A consequência direta é a paralisia em pautas importantes e a dificuldade em construir pontes. A superação desse desafio exige um esforço conjunto de lideranças políticas, meios de comunicação e da própria sociedade civil para promover a tolerância, o respeito às diferenças e a valorização do debate baseado em fatos.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-david-ricks" data-category="paginas_amarelas">
-                    <details>
-                        <summary>
-                            <h3>Entrevista Exclusiva com David Ricks: O "Doutor Mounjaro" e a Luta Contra a Obesidade</h3>
-                            <p class="meta-info">Por Revista Veja</p>
-                            <p class="summary-text">O CEO da Eli Lilly, David Ricks, conhecido como "Doutor Mounjaro", detalha os planos ambiciosos da farmacêutica para erradicar a obesidade e sua busca incessante por medicamentos inovadores, incluindo uma promissora droga para Alzheimer.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>Na entrevista exclusiva, Ricks discute a importância de abordagens multifacetadas para a obesidade, combinando medicação com mudanças no estilo de vida. Ele também compartilha insights sobre os desafios e as oportunidades no desenvolvimento de novas terapias para doenças crônicas, e a visão da Eli Lilly para o futuro da saúde global.</p>
-                            <h4>Principais pontos da entrevista:</h4>
-                            <ul>
-                                <li>Mounjaro e Zepbound: Ricks enfatiza o impacto dessas drogas no tratamento da obesidade e diabetes tipo 2, destacando que elas são mais do que "medicamentos para emagrecer", mas sim para tratar uma doença crônica complexa.</li>
-                                <li>Estratégia de Longo Prazo: A Eli Lilly está comprometida com a pesquisa e desenvolvimento contínuos de novas moléculas para obesidade, com o objetivo de oferecer opções mais variadas e eficazes.</li>
-                                <li>Pesquisa em Alzheimer: Embora o foco principal seja obesidade, a empresa tem uma droga promissora em testes para Alzheimer, o que demonstra a amplitude de sua pesquisa farmacêutica. Ricks ressalta a importância de encontrar soluções para doenças neurodegenerativas.</li>
-                                <li>Acessibilidade e Preço: A entrevista aborda os desafios de acessibilidade e o custo dos novos medicamentos, e a Eli Lilly está buscando estratégias para tornar as terapias mais amplamente disponíveis.</li>
-                                <li>Inovação e Futuro: Ricks expressa otimismo sobre o futuro da medicina e a capacidade da indústria farmacêutica de transformar a vida das pessoas, através da ciência e da inovação contínua.</li>
-                            </ul>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-gaza-desespero" data-category="seguranca_meio_ambiente">
-                    <details>
-                        <summary>
-                            <h3>Imagem da Semana: O Retrato do Desespero na Faixa de Gaza</h3>
-                            <p class="meta-info">Por Agência Reuters</p>
-                            <p class="summary-text">A escassez de itens básicos e a dramática situação humanitária na Faixa de Gaza é ilustrada pela comovente imagem que se tornou o retrato do desespero em uma região assolada pela crise.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>A fotografia, capturada por um fotojornalista local, mostra uma criança em meio a escombros, simbolizando a urgência da ajuda internacional.</p>
-                            <p>Organizações humanitárias têm alertado para a deterioração das condições de vida, com a falta de água potável, alimentos e medicamentos afetando milhões de pessoas. A imagem serve como um lembrete contundente da necessidade de ações imediatas para aliviar o sofrimento da população e buscar soluções duradouras para o conflito na região.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-culinaria-grega" data-category="cultura_lazer_sociedade">
-                    <details>
-                        <summary>
-                            <h3>Tradição e Modernidade na Culinária Grega em São Paulo: Um Passeio pelos Sabores do Mediterrâneo</h3>
-                            <p class="meta-info">Por Ana Paula Viveiros (Estadão)</p>
-                            <p class="summary-text">A cena gastronômica grega em São Paulo oferece uma rica fusão de tradição e modernidade, com estabelecimentos que celebram a riqueza de ingredientes frescos e temperos marcantes, como o Acropolis e Prato Grego.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>De pratos clássicos como o Moussaka e Souvlaki, a inovações que reinventam a culinária mediterrânea, os restaurantes gregos da capital paulista convidam a uma viagem de sabores e aromas, proporcionando uma experiência autêntica e inesquecível para os amantes da boa mesa.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-olimpiadas-paris" data-category="esportes">
-                    <details>
-                        <summary>
-                            <h3>Olimpíadas de Paris: Expectativas para as medalhas brasileiras</h3>
-                            <p class="meta-info">Por Maria Clara Pires (GE)</p>
-                            <p class="summary-text">Com a proximidade dos Jogos Olímpicos de Paris, a delegação brasileira intensifica os treinos e a preparação final. As expectativas são altas em diversas modalidades, com atletas buscando superar seus próprios recordes e trazer medalhas para casa.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>Nesta análise, destacamos os esportes e os atletas com maior potencial de pódio, considerando o desempenho recente em competições internacionais e o nível de preparação. A torcida brasileira se prepara para vibrar a cada prova.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-brasileirao" data-category="esportes">
-                    <details>
-                        <summary>
-                            <h3>Brasileirão: Análise dos favoritos e surpresas da rodada</h3>
-                            <p class="meta-info">Por Lucas Silva (Lance!)</p>
-                            <p class="summary-text">Com o campeonato pegando fogo, a última rodada do Brasileirão trouxe resultados inesperados e consolidou a posição de alguns favoritos ao título.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>Analisamos os destaques, as táticas que funcionaram e as performances individuais que chamaram a atenção.</p>
-                            <p>Times que vinham em baixa conseguiram reverter o quadro, enquanto gigantes tropeçaram, deixando o cenário ainda mais imprevisível. A briga pela liderança e contra o rebaixamento promete emoção até o fim.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-
-                <article class="news-item-expandable news-db-item" id="noticia-maria-silva" data-category="paginas_amarelas">
-                    <details>
-                        <summary>
-                            <h3>Perfil: Maria Silva, a Influenciadora que Transformou a Jardinagem em Paixão Nacional</h3>
-                            <p class="meta-info">Por Júlia Martins (Casa e Jardim)</p>
-                            <p class="summary-text">Conheça a história de Maria Silva, a influenciadora digital que saiu do anonimato para se tornar a voz da jardinagem no Brasil.</p>
-                        </summary>
-                        <div class="news-content">
-                            <p>Com dicas práticas e um carisma contagiante, ela conquistou milhões de seguidores e transformou a forma como muitos brasileiros veem o cultivo de plantas.</p>
-                            <p>Em sua entrevista exclusiva, Maria compartilha sua jornada, desde o primeiro vaso de suculentas até o império digital que construiu. Ela discute a importância da conexão com a natureza, os desafios de ser uma criadora de conteúdo e seus planos futuros para expandir seu alcance e impactar ainda mais vidas.</p>
-                            <div class="nav-links">
-                                <a href="index.html" class="db-back-home-button">Voltar para a Página Inicial</a>
-                                <button class="db-back-button">Voltar para a Página Anterior</button>
-                            </div>
-                        </div>
-                    </details>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
-        <div id="footer-nav-placeholder"></div>
-    </footer>
-
-    <script src="main.js"></script> 
-</body>
-</html>
-EOF
-
 echo "Todos os arquivos foram gerados no diretório '$OUTPUT_DIR'."
-echo "Para atualizar sua base no GitHub:"
-echo "1. Navegue até a raiz do seu repositório Git existente."
-echo "2. Apague os arquivos HTML, CSS e JS existentes (e.g., 'rm *.html *.css *.js')."
-echo "3. Copie o conteúdo do diretório '$OUTPUT_DIR' para a raiz do seu repositório Git."
-echo "   Exemplo: cp -r $OUTPUT_DIR/* ./"
-echo "4. Se você tiver o arquivo 'Banner.jpg', certifique-se de que ele esteja na mesma pasta raiz dos arquivos HTML."
-echo "5. Adicione as mudanças: git add ."
-echo "6. Faça um commit: git commit -m \"Recria todos os arquivos do projeto com formatação, menus e dados de notícias completos\""
-echo "7. Envie para o GitHub: git push origin main (ou o nome da sua branch principal, como 'master')"
-echo "Após o push, force a atualização do seu host (se for o caso) ou verifique se o cache do CDN/navegador está limpo."
+echo ""
+echo "--- Próximos Passos Essenciais ---"
+echo ""
+echo "1.  **Imagens:** Certifique-se de que o arquivo 'Banner.jpg' esteja na mesma pasta '$OUTPUT_DIR'."
+echo ""
+echo "2.  **Teste Localmente:**"
+echo "    a.  Abra seu terminal e navegue até a pasta do projeto: `cd $OUTPUT_DIR`"
+echo "    b.  Inicie um servidor web simples (requer Python): `python3 -m http.server 8000`"
+echo "        (Se 'python3' não funcionar, tente 'python -m http.server 8000')"
+echo "    c.  Abra seu navegador e acesse: `http://localhost:8000/index.html`"
+echo "        Ou simplesmente: `http://localhost:8000/`"
+echo ""
+echo "3.  **Deploy para o GitHub (se já estiver funcionando localmente):**"
+echo "    a.  Navegue até a raiz do seu **repositório Git existente**."
+echo "    b.  **APAGUE** os arquivos HTML, CSS e JS existentes na raiz para evitar conflitos."
+echo "        Exemplo (cuidado ao usar 'rm -rf'): `rm *.html *.css *.js` (execute na raiz do seu repositório)"
+echo "    c.  **COPIE** o conteúdo do diretório '$OUTPUT_DIR' para a raiz do seu repositório Git."
+echo "        Exemplo: `cp -r $OUTPUT_DIR/* ./"
+echo "    d.  Adicione as mudanças: `git add .`"
+echo "    e.  Faça um commit: `git commit -m \"Atualiza projeto com todos os arquivos, menus e noticias via script\"`"
+echo "    f.  Envie para o GitHub: `git push origin main` (ou 'master', se for sua branch principal)"
+echo ""
+echo "Após o push, se o seu site estiver em um serviço de hospedagem, pode ser necessário limpar o cache do CDN ou do próprio serviço. Para seu navegador, um 'Hard Refresh' (Ctrl+Shift+R ou Cmd+Shift+R) também ajuda a limpar o cache."

@@ -26,7 +26,9 @@ header p {
     font-size: 1.1em;
 }
 
+/* Esconde a navegação no topo por padrão, ela será mostrada via media query para desktop */
 nav {
+    display: none; /* Esconde a nav por padrão */
     background-color: #007bff;
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -187,16 +189,21 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 15px 0;
+    padding: 15px 0; /* Padding padrão para desktop */
     margin-top: 30px;
     font-size: 0.9em;
     width: 100%; /* Garante que o footer ocupe a largura total */
 }
 
+footer p {
+    display: block; /* Garante que o parágrafo de copyright seja visível por padrão */
+    color: white;
+}
+
 /* Responsividade para Mobile */
 @media (max-width: 768px) {
-    /* Oculta o menu de navegação padrão no topo em mobile */
-    nav {
+    /* Esconde o parágrafo de copyright no footer em mobile */
+    footer p {
         display: none;
     }
 
@@ -216,38 +223,30 @@ footer {
         margin-top: 0; /* Remove a margem superior do footer */
     }
 
-    footer p {
-        display: none; /* Oculta o texto de copyright em mobile quando o footer vira menu */
-    }
-
-    footer ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex; /* Transforma o ul em flexbox */
+    /* Mostra a navegação que está dentro do footer em mobile */
+    footer nav {
+        display: block; /* Faz a nav ser exibida */
         width: 100%; /* Ocupa a largura total do footer */
-        justify-content: space-around; /* Distribui os itens */
+        padding: 0;
+        box-shadow: none; /* Remove a sombra da nav dentro do footer */
     }
 
-    footer ul li {
+    footer nav ul {
+        flex-direction: row; /* Itens do menu lado a lado no footer mobile */
+        justify-content: space-around; /* Distribui os itens */
+        align-items: center;
+        height: 100%; /* Ocupa a altura total do footer */
+    }
+
+    footer nav ul li {
         margin: 0; /* Remove margens dos itens de lista */
         flex: 1; /* Faz os itens ocuparem espaço igual */
         text-align: center; /* Centraliza o texto */
     }
 
-    footer ul li a {
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
+    footer nav ul li a {
         padding: 10px 5px; /* Aumenta a área clicável */
-        display: block; /* Faz o link ocupar todo o li */
-        transition: background-color 0.3s ease;
         font-size: 0.8em; /* Tamanho da fonte menor para mais itens */
-    }
-
-    footer ul li a:hover,
-    footer ul li a.active {
-        background-color: #004085;
     }
 
     /* Adaptação para o conteúdo principal para não ser coberto pelo footer fixo */
@@ -278,23 +277,27 @@ footer {
     }
 }
 
-/* Regras para o footer em desktop, se o media query não aplicar */
+/* Regras para Desktop (telas maiores que 768px) */
 @media (min-width: 769px) {
+    /* Mostra a navegação no topo em desktop */
+    nav {
+        display: block; /* A nav que estava escondida agora aparece no topo */
+    }
+
+    /* Oculta a navegação (ul) que está dentro do footer em desktop */
+    footer nav {
+        display: none;
+    }
+
     footer {
-        position: static; /* Volta à posição normal em desktop */
+        position: static; /* Volta o footer para a posição normal */
         padding: 15px 0; /* Retorna o padding padrão */
         margin-top: 30px; /* Retorna a margem superior */
-        display: block; /* Volta a ser um bloco normal */
+        display: block; /* Garante que o footer se comporte como um bloco */
         height: auto; /* Altura automática */
     }
 
-    footer p {
-        display: block; /* Mostra o texto de copyright */
-        color: white; /* Cor do texto de copyright */
-        font-size: 0.9em;
-    }
-
-    footer ul {
-        display: none; /* Oculta o UL do footer em desktop */
+    body {
+        padding-bottom: 0; /* Remove o padding do body em desktop */
     }
 }

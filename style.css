@@ -4,6 +4,9 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    display: flex; /* Usado para layout flexbox em body */
+    flex-direction: column; /* Itens empilhados verticalmente */
+    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
 }
 
 header {
@@ -56,25 +59,38 @@ nav ul li a.active {
     border-radius: 5px;
 }
 
+/* O container principal que limita a largura do conteúdo */
 main {
     padding: 20px;
-    max-width: 1200px;
-    margin: 20px auto;
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 20px auto; /* Centraliza o conteúdo e adiciona margem */
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
+    flex-grow: 1; /* Faz o main ocupar o espaço restante, empurrando o footer para baixo */
 }
 
+/* Estilos para a seção do banner */
 .banner-section {
     text-align: center;
     margin-bottom: 30px;
+    max-width: 1200px; /* Mesma largura máxima do 'main' */
+    margin: 20px auto; /* Centraliza o banner */
+    padding: 0 20px; /* Adiciona padding lateral para mobile, como o 'main' */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+.banner-section a {
+    display: block; /* Faz o link ocupar todo o espaço da imagem */
+    line-height: 0; /* Remove espaço extra de linha do link */
 }
 
 .main-banner {
-    width: 100%;
-    height: auto;
+    width: 100%; /* Faz o banner ocupar 100% da largura do pai (.banner-section) */
+    height: auto; /* Mantém a proporção da imagem */
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: block; /* Remove qualquer espaço extra abaixo da imagem */
 }
 
 .banner-text {
@@ -167,7 +183,6 @@ main {
     margin-bottom: 0;
 }
 
-
 footer {
     background-color: #333;
     color: white;
@@ -175,22 +190,74 @@ footer {
     padding: 15px 0;
     margin-top: 30px;
     font-size: 0.9em;
+    width: 100%; /* Garante que o footer ocupe a largura total */
 }
 
 /* Responsividade para Mobile */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column; /* Itens do menu um abaixo do outro */
-        align-items: center; /* Centraliza os itens */
+    /* Oculta o menu de navegação padrão no topo em mobile */
+    nav {
+        display: none;
     }
 
-    nav ul li {
-        margin: 5px 0; /* Espaçamento vertical entre os itens do menu */
+    /* Estiliza o footer como um menu fixo no rodapé */
+    footer {
+        background-color: #007bff; /* Cor de fundo do menu */
+        padding: 0; /* Remove padding padrão do footer para o menu */
+        position: fixed; /* Fixa o footer na parte inferior da tela */
+        bottom: 0; /* Alinha na parte inferior */
+        left: 0; /* Alinha na esquerda */
+        z-index: 1000; /* Garante que ocupe a frente de outros elementos */
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Sombra para destacar */
+        display: flex; /* Ativa flexbox para os itens do menu */
+        justify-content: space-around; /* Distribui os itens uniformemente */
+        align-items: center; /* Centraliza verticalmente */
+        height: 60px; /* Altura do menu fixo */
+        margin-top: 0; /* Remove a margem superior do footer */
+    }
+
+    footer p {
+        display: none; /* Oculta o texto de copyright em mobile quando o footer vira menu */
+    }
+
+    footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex; /* Transforma o ul em flexbox */
+        width: 100%; /* Ocupa a largura total do footer */
+        justify-content: space-around; /* Distribui os itens */
+    }
+
+    footer ul li {
+        margin: 0; /* Remove margens dos itens de lista */
+        flex: 1; /* Faz os itens ocuparem espaço igual */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    footer ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 5px; /* Aumenta a área clicável */
+        display: block; /* Faz o link ocupar todo o li */
+        transition: background-color 0.3s ease;
+        font-size: 0.8em; /* Tamanho da fonte menor para mais itens */
+    }
+
+    footer ul li a:hover,
+    footer ul li a.active {
+        background-color: #004085;
+    }
+
+    /* Adaptação para o conteúdo principal para não ser coberto pelo footer fixo */
+    body {
+        padding-bottom: 60px; /* Adiciona padding na parte inferior do body para o footer fixo */
     }
 
     main {
-        margin: 10px;
-        padding: 15px;
+        margin: 10px; /* Margem menor nas laterais para telas pequenas */
+        padding: 15px; /* Padding interno menor */
     }
 
     header h1 {
@@ -205,6 +272,29 @@ footer {
         font-size: 1.3em;
     }
 
-    /* O banner já deve estar responsivo devido ao width: 100% e height: auto; */
-    /* Nenhuma alteração específica para .main-banner aqui é necessária, pois já está bem configurado */
+    .banner-section {
+        margin: 10px auto; /* Ajusta a margem do banner para mobile */
+        padding: 0 15px; /* Adapta o padding para mobile, seguindo o 'main' */
+    }
+}
+
+/* Regras para o footer em desktop, se o media query não aplicar */
+@media (min-width: 769px) {
+    footer {
+        position: static; /* Volta à posição normal em desktop */
+        padding: 15px 0; /* Retorna o padding padrão */
+        margin-top: 30px; /* Retorna a margem superior */
+        display: block; /* Volta a ser um bloco normal */
+        height: auto; /* Altura automática */
+    }
+
+    footer p {
+        display: block; /* Mostra o texto de copyright */
+        color: white; /* Cor do texto de copyright */
+        font-size: 0.9em;
+    }
+
+    footer ul {
+        display: none; /* Oculta o UL do footer em desktop */
+    }
 }

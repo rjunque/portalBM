@@ -4,9 +4,9 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
-    display: flex; /* Usado para layout flexbox em body */
-    flex-direction: column; /* Itens empilhados verticalmente */
-    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -26,28 +26,27 @@ header p {
     font-size: 1.1em;
 }
 
-/* Esconde a navegação no topo por padrão, ela será mostrada via media query para desktop */
-nav {
-    display: none; /* Esconde a nav por padrão */
+/* Estilos para o menu principal no topo (main-nav) */
+.main-nav {
     background-color: #007bff;
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-nav ul {
+.main-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Permite que os itens quebrem linha em telas pequenas */
+    flex-wrap: wrap;
 }
 
-nav ul li {
+.main-nav ul li {
     margin: 0 15px;
 }
 
-nav ul li a {
+.main-nav ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -55,8 +54,8 @@ nav ul li a {
     transition: background-color 0.3s ease;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
     background-color: #004085;
     border-radius: 5px;
 }
@@ -64,35 +63,35 @@ nav ul li a.active {
 /* O container principal que limita a largura do conteúdo */
 main {
     padding: 20px;
-    max-width: 1200px; /* Largura máxima do conteúdo */
-    margin: 20px auto; /* Centraliza o conteúdo e adiciona margem */
+    max-width: 1200px;
+    margin: 20px auto;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     border-radius: 8px;
-    flex-grow: 1; /* Faz o main ocupar o espaço restante, empurrando o footer para baixo */
+    flex-grow: 1;
 }
 
 /* Estilos para a seção do banner */
 .banner-section {
     text-align: center;
     margin-bottom: 30px;
-    max-width: 1200px; /* Mesma largura máxima do 'main' */
-    margin: 20px auto; /* Centraliza o banner */
-    padding: 0 20px; /* Adiciona padding lateral para mobile, como o 'main' */
-    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .banner-section a {
-    display: block; /* Faz o link ocupar todo o espaço da imagem */
-    line-height: 0; /* Remove espaço extra de linha do link */
+    display: block;
+    line-height: 0;
 }
 
 .main-banner {
-    width: 100%; /* Faz o banner ocupar 100% da largura do pai (.banner-section) */
-    height: auto; /* Mantém a proporção da imagem */
+    width: 100%;
+    height: auto;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: block; /* Remove qualquer espaço extra abaixo da imagem */
+    display: block;
 }
 
 .banner-text {
@@ -155,9 +154,9 @@ main {
 
 /* Estilos para a página inicial (Destaques do Dia) */
 .home-news .news-summary-item {
-    background-color: #f0f8ff; /* Cor mais clara para destaque */
+    background-color: #f0f8ff;
     border: 1px solid #cceeff;
-    border-left: 5px solid #007bff; /* Borda lateral para destaque */
+    border-left: 5px solid #007bff;
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 5px;
@@ -189,74 +188,87 @@ footer {
     background-color: #333;
     color: white;
     text-align: center;
-    padding: 15px 0; /* Padding padrão para desktop */
+    padding: 15px 0;
     margin-top: 30px;
     font-size: 0.9em;
-    width: 100%; /* Garante que o footer ocupe a largura total */
+    width: 100%;
 }
 
 footer p {
-    display: block; /* Garante que o parágrafo de copyright seja visível por padrão */
-    color: white;
+    margin: 0;
+    padding: 5px 0;
 }
 
-/* Responsividade para Mobile */
+/* Estilos para o menu do rodapé (footer-nav) - este será o menu mobile */
+.footer-nav {
+    display: none; /* Por padrão, o menu do rodapé está oculto */
+    background-color: #007bff; /* Cor para o menu mobile */
+    padding: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px; /* Altura do menu fixo */
+}
+
+.footer-nav ul li {
+    margin: 0;
+    flex: 1; /* Faz os itens ocuparem espaço igual */
+    text-align: center;
+}
+
+.footer-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 5px;
+    display: block; /* Faz o link ocupar todo o li */
+    transition: background-color 0.3s ease;
+    font-size: 0.8em; /* Tamanho da fonte menor para mais itens */
+}
+
+.footer-nav ul li a:hover,
+.footer-nav ul li a.active {
+    background-color: #004085;
+}
+
+
+/* Responsividade para Mobile (telas menores ou iguais a 768px) */
 @media (max-width: 768px) {
-    /* Esconde o parágrafo de copyright no footer em mobile */
+    /* Oculta o menu principal do topo em mobile */
+    .main-nav {
+        display: none;
+    }
+
+    /* Mostra o menu do rodapé em mobile */
+    .footer-nav {
+        display: block;
+    }
+
+    /* Oculta o texto de copyright em mobile para dar espaço ao menu */
     footer p {
         display: none;
     }
 
-    /* Estiliza o footer como um menu fixo no rodapé */
-    footer {
-        background-color: #007bff; /* Cor de fundo do menu */
-        padding: 0; /* Remove padding padrão do footer para o menu */
-        position: fixed; /* Fixa o footer na parte inferior da tela */
-        bottom: 0; /* Alinha na parte inferior */
-        left: 0; /* Alinha na esquerda */
-        z-index: 1000; /* Garante que ocupe a frente de outros elementos */
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Sombra para destacar */
-        display: flex; /* Ativa flexbox para os itens do menu */
-        justify-content: space-around; /* Distribui os itens uniformemente */
-        align-items: center; /* Centraliza verticalmente */
-        height: 60px; /* Altura do menu fixo */
-        margin-top: 0; /* Remove a margem superior do footer */
-    }
-
-    /* Mostra a navegação que está dentro do footer em mobile */
-    footer nav {
-        display: block; /* Faz a nav ser exibida */
-        width: 100%; /* Ocupa a largura total do footer */
-        padding: 0;
-        box-shadow: none; /* Remove a sombra da nav dentro do footer */
-    }
-
-    footer nav ul {
-        flex-direction: row; /* Itens do menu lado a lado no footer mobile */
-        justify-content: space-around; /* Distribui os itens */
-        align-items: center;
-        height: 100%; /* Ocupa a altura total do footer */
-    }
-
-    footer nav ul li {
-        margin: 0; /* Remove margens dos itens de lista */
-        flex: 1; /* Faz os itens ocuparem espaço igual */
-        text-align: center; /* Centraliza o texto */
-    }
-
-    footer nav ul li a {
-        padding: 10px 5px; /* Aumenta a área clicável */
-        font-size: 0.8em; /* Tamanho da fonte menor para mais itens */
-    }
-
-    /* Adaptação para o conteúdo principal para não ser coberto pelo footer fixo */
+    /* Adiciona padding na parte inferior do body para o footer fixo */
     body {
-        padding-bottom: 60px; /* Adiciona padding na parte inferior do body para o footer fixo */
+        padding-bottom: 60px; /* Altura do footer-nav */
     }
 
     main {
-        margin: 10px; /* Margem menor nas laterais para telas pequenas */
-        padding: 15px; /* Padding interno menor */
+        margin: 10px;
+        padding: 15px;
     }
 
     header h1 {
@@ -272,32 +284,30 @@ footer p {
     }
 
     .banner-section {
-        margin: 10px auto; /* Ajusta a margem do banner para mobile */
-        padding: 0 15px; /* Adapta o padding para mobile, seguindo o 'main' */
+        margin: 10px auto;
+        padding: 0 15px;
     }
 }
 
 /* Regras para Desktop (telas maiores que 768px) */
 @media (min-width: 769px) {
-    /* Mostra a navegação no topo em desktop */
-    nav {
-        display: block; /* A nav que estava escondida agora aparece no topo */
+    /* Garante que o menu principal seja exibido em desktop */
+    .main-nav {
+        display: block;
     }
 
-    /* Oculta a navegação (ul) que está dentro do footer em desktop */
-    footer nav {
+    /* Oculta o menu do rodapé em desktop */
+    .footer-nav {
         display: none;
     }
 
-    footer {
-        position: static; /* Volta o footer para a posição normal */
-        padding: 15px 0; /* Retorna o padding padrão */
-        margin-top: 30px; /* Retorna a margem superior */
-        display: block; /* Garante que o footer se comporte como um bloco */
-        height: auto; /* Altura automática */
+    /* Garante que o texto de copyright apareça em desktop */
+    footer p {
+        display: block;
     }
 
+    /* Remove o padding extra do body em desktop */
     body {
-        padding-bottom: 0; /* Remove o padding do body em desktop */
+        padding-bottom: 0;
     }
 }

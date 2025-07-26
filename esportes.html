@@ -12,60 +12,28 @@
         <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="politica_nacional.html">Política Nacional</a></li>
-            <li><a href="seguranca_meio_ambiente.html">Segurança e Meio Ambiente</a></li>
-            <li><a href="economia_negocios.html">Economia & Negócios</a></li>
-            <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
-            <li><a href="esportes.html" class="active">Esportes</a></li>
-            <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
-            <li class="hidden-mobile"><a href="criar_noticia.html">Publicar Notícia (Única)</a></li>
-            <li class="hidden-mobile"><a href="publicacao_massa.html">Publicação em Massa</a></li>
-        </ul>
-    </nav>
+    <div id="main-nav-placeholder"></div>
 
     <section class="banner-section">
         <a href="https://pay.hub.la/UGt7sP1xgskF9R3YRNUI" target="_blank">
             <img src="Banner.jpg" alt="Banner do Portal BM" class="main-banner">
         </a>
-        <p class="banner-text">Fique por dentro do mundo dos Esportes.</p>
+        <p class="banner-text">As últimas notícias do mundo dos Esportes.</p>
     </section>
 
     <main>
         <section class="category">
             <h2>Esportes</h2>
-            <article class="news-item">
-                <h3>Brasileirão: Análise dos favoritos e surpresas da rodada</h3>
-                <p>Por Lucas Silva (Lance!)</p>
-                <p>Com o campeonato pegando fogo, a última rodada do Brasileirão trouxe resultados inesperados e consolidou a posição de alguns favoritos ao título. Analisamos os destaques, as táticas que funcionaram e as performances individuais que chamaram a atenção.</p>
-                <p>Times que vinham em baixa conseguiram reverter o quadro, enquanto gigantes tropeçaram, deixando o cenário ainda mais imprevisível. A briga pela liderança e contra o rebaixamento promete emoção até o fim.</p>
-            </article>
-            <article class="news-item">
-                <h3>Olimpíadas de Paris: Expectativas para as medalhas brasileiras</h3>
-                <p>Por Maria Clara Pires (GE)</p>
-                <p>Com a proximidade dos Jogos Olímpicos de Paris, a delegação brasileira intensifica os treinos e a preparação final. As expectativas são altas em diversas modalidades, com atletas buscando superar seus próprios recordes e trazer medalhas para casa.</p>
-                <p>Nesta análise, destacamos os esportes e os atletas com maior potencial de pódio, considerando o desempenho recente em competições internacionais e o nível de preparação. A torcida brasileira se prepara para vibrar a cada prova.</p>
-            </article>
+            <div id="news-container"></div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Portal BM. Todos os direitos reservados.</p>
-        <nav class="footer-nav">
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="politica_nacional.html">Política Nacional</a></li>
-                <li><a href="seguranca_meio_ambiente.html">Segurança e Meio Ambiente</a></li>
-                <li><a href="economia_negocios.html">Economia & Negócios</a></li>
-                <li><a href="cultura_lazer_sociedade.html">Cultura, Lazer e Sociedade</a></li>
-                <li><a href="esportes.html">Esportes</a></li>
-                <li><a href="paginas_amarelas.html">Páginas Amarelas</a></li>
-                <li class="hidden-desktop"><a href="criar_noticia.html">Publicar Notícia</a></li>
-                <li class="hidden-desktop"><a href="publicacao_massa.html">Publicar Massa</a></li>
-            </ul>
-        </nav>
+        <div id="footer-nav-placeholder"></div>
     </footer>
+
+    <script src="common_scripts.js"></script> 
+    <script src="esportes_page.js"></script> 
 </body>
 </html>

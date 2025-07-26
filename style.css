@@ -177,15 +177,15 @@ footer {
     font-size: 0.9em;
 }
 
-/* Responsividade Básica */
+/* Responsividade para Mobile */
 @media (max-width: 768px) {
     nav ul {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: column; /* Itens do menu um abaixo do outro */
+        align-items: center; /* Centraliza os itens */
     }
 
     nav ul li {
-        margin: 5px 0;
+        margin: 5px 0; /* Espaçamento vertical entre os itens do menu */
     }
 
     main {
@@ -204,4 +204,7 @@ footer {
     .news-item h3 {
         font-size: 1.3em;
     }
+
+    /* O banner já deve estar responsivo devido ao width: 100% e height: auto; */
+    /* Nenhuma alteração específica para .main-banner aqui é necessária, pois já está bem configurado */
 }

@@ -9,16 +9,40 @@
 <body>
     <header>
         <h1>Portal BM</h1>
-        <p>As notícias mais importantes do dia, reunidas em um solo lugar.</p>
+        <p>As notícias mais importantes do dia, reunidas em um só lugar.</p>
     </header>
 
     <div id="main-nav-placeholder"></div>
 
-    <main>
-        <section class="category admin-page">
-            <h2>Criar Nova Notícia</h2>
-            <p>Em desenvolvimento. Futuramente, aqui você poderá criar e enviar novas notícias para o portal.</p>
-            </section>
+    <main class="admin-page">
+        <h2>Criar Nova Notícia</h2>
+        <form id="news-form">
+            <label for="news-title">Título:</label><br>
+            <input type="text" id="news-title" name="title" required><br><br>
+            
+            <label for="news-category">Categoria:</label><br>
+            <select id="news-category" name="category" required>
+                <option value="Política Nacional">Política Nacional</option>
+                <option value="Economia e Negócios">Economia e Negócios</option>
+                <option value="Cultura, Lazer e Sociedade">Cultura, Lazer e Sociedade</option>
+                <option value="Esportes">Esportes</option>
+                <option value="Segurança e Meio Ambiente">Segurança e Meio Ambiente</option>
+                <option value="Páginas Amarelas">Páginas Amarelas</option>
+            </select><br><br>
+            
+            <label for="news-summary">Resumo:</label><br>
+            <textarea id="news-summary" name="summary" rows="4" required></textarea><br><br>
+            
+            <label for="news-full-content">Conteúdo Completo:</label><br>
+            <textarea id="news-full-content" name="full_content" rows="10" required></textarea><br><br>
+            
+            <button type="submit">Publicar Notícia</button>
+        </form>
+        <p id="message" style="margin-top: 20px; color: green; font-weight: bold;"></p>
+        <div class="nav-links" style="justify-content: center; gap: 15px;">
+            <a href="index.html" class="db-back-home-button" style="margin-top: 20px;">Voltar à Página Inicial</a>
+            <a href="publicacao_massa.html" class="db-back-home-button" style="margin-top: 20px;">Publicação em Massa</a>
+        </div>
     </main>
 
     <footer>

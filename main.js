@@ -1,8 +1,10 @@
 // main.js
 
 // Dados de exemplo das notícias
-// Este array simula um banco de dados de notícias
-const newsData = [
+// Mantenha este array como a base inicial das suas notícias.
+// As novas notícias adicionadas via formulário serão salvas no localStorage
+// e carregadas para esta variável 'newsData' ao iniciar.
+let newsData = [
     {
         id: 1,
         title: "Governo anuncia novo pacote econômico para impulsionar o PIB",
@@ -81,16 +83,90 @@ const newsData = [
         category: "Esportes",
         date: "2024-07-25",
         summary: "Felipe Almeida salta 8,95m em etapa da Diamond League, superando marca de longa data.",
-        full_content: "O Brasil tem um novo recordista mundial! Felipe Almeida, promessa do atletismo nacional, chocou o mundo ao saltar incríveis 8,95 metros na etapa de Mônaco da Diamond League. A marca supera em um centímetro o recorde anterior, que perdurava por mais de 30 anos. A torcida foi à loucura com o feito histórico de Almeida, que agora se firma como favorito à medalha de ouro nas próximas Olimpíadas. O atleta, visivelmente emocionado, dedicou a vitória à sua equipe técnica e à sua família. O salto é um marco para o esporte brasileiro e um incentivo para a nova geração de atletas que buscam inspiração."
+        full_content: "A torcida foi à loucura com o feito histórico de Almeida, que agora se firma como favorito à medalha de ouro nas próximas Olimpíadas. O atleta, visivelmente emocionado, dedicou a vitória à sua equipe técnica e à sua família. O salto é um marco para o esporte brasileiro e um incentivo para a nova geração de atletas que buscam inspiração."
+    },
+    // Notícias adicionadas a partir do ID 11
+    {
+        id: 11,
+        title: "Brasil Lança Satélite de Comunicações de Última Geração",
+        category: "Tecnologia", 
+        date: "2025-07-26", 
+        summary: "Novo satélite promete revolucionar o acesso à internet em áreas remotas do país e impulsionar a pesquisa científica.",
+        full_content: "<p>A Agência Espacial Brasileira (AEB) anunciou hoje o lançamento bem-sucedido de um novo satélite geoestacionário, o 'Brasilsat-5', que promete trazer avanços significativos para o setor de comunicações e pesquisa no país. O satélite, desenvolvido em parceria com universidades e empresas nacionais, terá como principal função expandir a cobertura de internet de banda larga para regiões de difícil acesso, além de coletar dados ambientais cruciais para estudos climáticos.</p><p>O projeto representa um marco na capacidade tecnológica do Brasil, demonstrando a expertise local em engenharia espacial. Especialistas afirmam que o Brasilsat-5 fortalecerá a soberania digital do país e abrirá novas portas para inovações em telemedicina, educação a distância e agronegócio de precisão.</p>"
+    },
+    {
+        id: 12,
+        title: "Cidade Anuncia Projeto Ambioclima para Mitigar Impactos das Chuvas",
+        category: "Segurança e Meio Ambiente",
+        date: "2025-07-26",
+        summary: "Iniciativa prevê obras de drenagem e conscientização ambiental para enfrentar eventos climáticos extremos.",
+        full_content: "A prefeitura de Itatiba lançou hoje o 'Projeto Ambioclima', uma série de ações integradas para preparar a cidade para os desafios impostos pelas mudanças climáticas, especialmente as fortes chuvas. O plano inclui a construção de novas bacias de retenção, a modernização da rede de drenagem urbana e um programa intensivo de educação ambiental nas escolas. 'Nosso objetivo é garantir a segurança da população e minimizar os transtornos causados pelos fenôchos meteorológicos cada vez mais intensos', declarou o prefeito durante a coletiva de imprensa. A iniciativa, que conta com financiamento federal e parcerias com a sociedade civil, prevê também o mapeamento de áreas de risco e a implementação de um sistema de alerta precoce para moradores."
+    },
+    {
+        id: 13,
+        title: "Empresa Local de Softwares Conquista Mercado Internacional com Inovação em Fintech",
+        category: "Economia e Negócios",
+        date: "2025-07-26",
+        summary: "Startup de Itatiba fecha contratos milionários na Europa e Ásia com plataforma de gestão financeira inteligente.",
+        full_content: "A 'InovaGestão Tech', startup de softwares sediada em Itatiba, está celebrando um marco histórico: a conquista de importantes contratos nos mercados europeu e asiático. A empresa, especializada em soluções fintech para pequenas e médias empresas, desenvolveu uma plataforma de gestão financeira que integra inteligência artificial para otimizar fluxos de caixa e prever tendências de mercado. 'É o reconhecimento de anos de trabalho árduo e inovação contínua. Estamos provando que o interior paulista tem capacidade de gerar tecnologia de ponta para o mundo', afirmou a CEO, Ana Clara, em comunicado. A expansão internacional deverá gerar dezenas de novos empregos na cidade nos próximos meses, consolidando a região como um polo de tecnologia."
+    },
+    {
+        id: 14,
+        title: "Festival Gastronômico Regional Quebra Recordes de Público e Vendas",
+        category: "Cultura, Lazer e Sociedade",
+        date: "2025-07-25",
+        summary: "Evento de quatro dias celebra a culinária local com pratos típicos e shows, superando expectativas.",
+        full_content: "O 'Sabor do Interior', festival gastronômico que reuniu cozinheiros e produtores de toda a região, encerrou sua quarta edição com números impressionantes de público e vendas. Durante quatro dias, moradores e turistas lotaram a praça central, desfrutando de uma variedade de pratos típicos, desde doces artesanais a comidas de rua inovadoras, todos com ingredientes locais. Além das delícias culinárias, o evento contou com apresentações musicais de artistas da região e oficinas de culinária para crianças. 'É um orgulho ver nossa cultura gastronômica valorizada e, ao mesmo tempo, impulsionar a economia local', disse o organizador principal. O sucesso do festival já garante sua realização no próximo ano, com a promessa de ainda mais atrações."
+    },
+    {
+        id: 15,
+        title: "Time de Basquete Feminino de Itatiba Vence Campeonato Estadual Invicto",
+        category: "Esportes",
+        date: "2025-07-24",
+        summary: "A equipe local demonstra superioridade tática e técnica, conquistando o título com campanha impecável.",
+        full_content: "As 'Panteras da Cesta', como são carinhosamente chamadas, o time de basquete feminino de Itatiba, sagraram-se campeãs estaduais de forma invicta, em uma campanha que entrará para a história do esporte local. Com atuações dominantes desde a fase de grupos, a equipe demonstrou um entrosamento tático e uma técnica apurada, superando todos os adversários com placares expressivos. A final, disputada na capital, foi um espetáculo de garra e talento, culminando em uma vitória por 78 a 65 sobre o forte time da metrópole. A técnica, Roberta Oliveira, elogiou a dedicação das atletas e o apoio incondicional da torcida. A vitória inspira jovens atletas e reforça a importância do investimento no esporte feminino."
+    },
+    {
+        id: 16,
+        title: "Seminário de Segurança Pública Reúne Especialistas para Debater Desafios Urbanos",
+        category: "Política Nacional", 
+        date: "2025-07-23",
+        summary: "Autoridades e acadêmicos discutem estratégias inovadoras para combater a criminalidade e promover a paz social.",
+        full_content: "Um seminário de alto nível sobre segurança pública foi realizado hoje em Itatiba, reunindo renomados especialistas, autoridades policiais, representantes do poder judiciário e acadêmicos. O evento teve como foco a troca de experiências e a proposição de soluções inovadoras para os desafios da segurança em centros urbanos. Temas como o uso de tecnologia no combate ao crime, a importância da inteligência policial e a participação comunitária na construção da paz social foram amplamente debatidos. 'A segurança é um direito de todos e uma responsabilidade compartilhada. Precisamos de abordagens multifacetadas para construir cidades mais seguras', pontuou o Secretário de Segurança Pública. As conclusões do seminário serão encaminhadas aos órgãos competentes para subsidiar novas políticas."
     }
 ];
 
+// --- Funções para Gerenciamento de Notícias (localStorage) ---
+
+// Função para carregar notícias do localStorage
+function loadNewsFromLocalStorage() {
+    const storedNews = localStorage.getItem('portalBmNews');
+    if (storedNews) {
+        const parsedNews = JSON.parse(storedNews);
+        
+        // Crie um Set para armazenar IDs já vistos e evitar duplicatas
+        const uniqueNewsMap = new Map();
+
+        // Adicione as notícias base primeiro (garante que IDs fixos sempre estejam lá)
+        newsData.forEach(news => uniqueNewsMap.set(news.id, news));
+
+        // Adicione as notícias do localStorage, sobrescrevendo se o ID já existir
+        parsedNews.forEach(news => uniqueNewsMap.set(news.id, news));
+        
+        // Converte o mapa de volta para um array e atualiza newsData
+        newsData = Array.from(uniqueNewsMap.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    }
+}
+
+// Função para salvar o newsData atual no localStorage
+function saveNewsToLocalStorage() {
+    localStorage.setItem('portalBmNews', JSON.stringify(newsData));
+}
+
 // --- Funções de Carregamento de Conteúdo ---
 
-// Função para carregar o cabeçalho e o rodapé a partir de header.html
-// Esta função é chamada automaticamente quando o main.js é executado
 function loadHeaderAndFooter() {
-    // Carregar o menu principal
     fetch('header.html')
         .then(response => response.text())
         .then(html => {
@@ -101,51 +177,40 @@ function loadHeaderAndFooter() {
             if (mainNavPlaceholder) {
                 mainNavPlaceholder.innerHTML = `<nav class="main-nav"><ul>${navContent}</ul></nav>`;
             }
-
-            // Carregar o menu do rodapé (se existir no header.html e no placeholder)
             const footerNavContent = doc.querySelector('.footer-nav') ? doc.querySelector('.footer-nav').innerHTML : '';
             const footerNavPlaceholder = document.getElementById('footer-nav-placeholder');
             if (footerNavPlaceholder) {
                 footerNavPlaceholder.innerHTML = `<nav class="footer-nav"><ul>${footerNavContent}</ul></nav>`;
             }
-
-            // Ativar o link da página atual no menu
             setActiveLink();
         })
         .catch(error => console.error('Erro ao carregar cabeçalho e rodapé:', error));
 }
 
-// Função para ativar o link do menu correspondente à página atual
 function setActiveLink() {
-    const currentPath = window.location.pathname.split('/').pop(); // Obtém o nome do arquivo da URL
-    const navLinks = document.querySelectorAll('.main-nav a, .footer-nav a'); // Seleciona links dos dois menus
-
+    const currentPath = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.main-nav a, .footer-nav a');
     navLinks.forEach(link => {
-        // Remove a classe 'active' de todos os links primeiro
         link.classList.remove('active');
-
-        // Adiciona 'active' se o href do link corresponder ao caminho atual
         if (link.getAttribute('href') === currentPath) {
             link.classList.add('active');
         }
     });
 }
 
-// Função para renderizar notícias em uma categoria específica
 function renderNews(category, containerId = 'news-container', displayCount = 5) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
     let filteredNews = [];
     if (category === 'Destaques do Dia') {
-        // Para a página inicial, exibe as 5 notícias mais recentes
         filteredNews = newsData.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, displayCount);
     } else {
         filteredNews = newsData.filter(news => news.category === category)
-                               .sort((a, b) => new Date(b.date) - new Date(a.date)); // Ordena por data
+                               .sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
-    container.innerHTML = ''; // Limpa o container antes de adicionar novas notícias
+    container.innerHTML = '';
 
     if (filteredNews.length === 0) {
         container.innerHTML = '<p>Nenhuma notícia encontrada nesta categoria.</p>';
@@ -174,10 +239,9 @@ function renderNews(category, containerId = 'news-container', displayCount = 5) 
     });
 }
 
-// Função para exibir a notícia completa no noticias_db.html
 function displayFullNews(newsId) {
     const fullNewsContainer = document.getElementById('full-news-display');
-    const newsItem = newsData.find(item => item.id == newsId); // Assumindo que newsData está carregado
+    const newsItem = newsData.find(item => item.id == newsId);
 
     if (newsItem) {
         fullNewsContainer.innerHTML = `
@@ -194,11 +258,10 @@ function displayFullNews(newsId) {
             </div>
         `;
         
-        // Adicionar evento de clique ao novo botão "Voltar à Página Anterior"
         const backButton = document.querySelector('.db-back-button');
         if (backButton) {
             backButton.addEventListener('click', () => {
-                window.history.back(); // Esta linha faz o botão voltar na pilha do histórico do navegador
+                window.history.back();
             });
         }
         
@@ -228,14 +291,17 @@ function displayFullNews(newsId) {
 // --- Lógica de Inicialização ao Carregar a Página ---
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Carregar notícias do localStorage ANTES de tudo
+    loadNewsFromLocalStorage();
+
     // 1. Carregar cabeçalho e rodapé em todas as páginas
     loadHeaderAndFooter();
 
     // 2. Lógica para carregar notícias dependendo da página
-    const currentPage = window.location.pathname.split('/').pop(); // Obtém o nome do arquivo da URL
+    const currentPage = window.location.pathname.split('/').pop();
 
     if (currentPage === 'index.html' || currentPage === '') {
-        renderNews('Destaques do Dia'); // Página inicial mostra destaques
+        renderNews('Destaques do Dia');
     } else if (currentPage === 'politica_nacional.html') {
         renderNews('Política Nacional');
     } else if (currentPage === 'economia_negocios.html') {
@@ -249,15 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (currentPage === 'paginas_amarelas.html') {
         renderNews('Páginas Amarelas');
     } else if (currentPage === 'noticias_db.html') {
-        // Para noticias_db.html, obtém o ID da notícia da URL
         const urlParams = new URLSearchParams(window.location.search);
-        const newsId = urlParams.get('id'); // Pega o 'id' da URL
-        
-        // Verifica se o newsId existe e se é um número válido antes de tentar exibir
+        const newsId = urlParams.get('id');
         if (newsId && !isNaN(newsId)) { 
-            displayFullNews(parseInt(newsId)); // Converte para número e chama a função
+            displayFullNews(parseInt(newsId));
         } else {
-            // Se nenhum ID for fornecido ou for inválido, exibe uma mensagem
             const fullNewsContainer = document.getElementById('full-news-display');
             if (fullNewsContainer) {
                 fullNewsContainer.innerHTML = `
@@ -267,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="index.html" class="db-back-home-button">Voltar à Página Inicial</a>
                     </div>
                 `;
-                // Adicionar evento de clique ao botão "Voltar" mesmo em caso de erro
                 const backButton = document.querySelector('.db-back-button');
                 if (backButton) {
                     backButton.addEventListener('click', () => {
@@ -278,6 +339,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Elemento #full-news-display não encontrado na noticias_db.html");
             }
         }
+    } else if (currentPage === 'tecnologia.html') { 
+        renderNews('Tecnologia');
     }
-    // As páginas criar_noticia.html e publicacao_massa.html não precisam carregar notícias dinamicamente
+    else if (currentPage === 'criar_noticia.html') {
+        const newsForm = document.getElementById('news-form');
+        const messageDiv = document.getElementById('message');
+
+        if (newsForm) {
+            newsForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const title = document.getElementById('news-title').value;
+                const category = document.getElementById('news-category').value;
+                const summary = document.getElementById('news-summary').value;
+                const full_content = document.getElementById('news-full-content').value;
+                const date = new Date().toISOString().slice(0, 10);
+
+                const newId = newsData.length > 0 ? Math.max(...newsData.map(n => n.id)) + 1 : 1;
+
+                const newNews = {
+                    id: newId,
+                    title,
+                    category,
+                    date,
+                    summary,
+                    full_content
+                };
+
+                newsData.push(newNews);
+                saveNewsToLocalStorage();
+                
+                messageDiv.textContent = 'Notícia publicada com sucesso!';
+                newsForm.reset();
+            });
+        }
+    }
 });

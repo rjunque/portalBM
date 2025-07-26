@@ -207,6 +207,13 @@ main {
     margin-top: 10px;
 }
 
+/* NOVO ESTILO PARA O LINK "VER NOTÍCIA COMPLETA" NO RESUMO */
+.news-full-link-container-summary {
+    text-align: right; /* Alinha o link à direita */
+    margin-top: 10px; /* Adiciona um pouco de espaço acima do link */
+    padding-right: 15px; /* Adiciona padding à direita para afastar da borda */
+}
+
 .news-item-expandable .news-content {
     padding: 15px;
     border-top: 1px solid #eee; /* Linha divisória para conteúdo expandido */
@@ -216,22 +223,27 @@ main {
     margin-bottom: 10px;
 }
 
+/* Este estilo antigo para news-full-link-container pode ser removido se não for mais usado */
+/*
 .news-item-expandable .news-full-link-container {
     text-align: right;
     padding: 10px 15px 5px;
-    background-color: #f0f0f0; /* Fundo para o container do link */
+    background-color: #f0f0f0;
     border-top: 1px solid #ddd;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+*/
 
-.news-item-expandable .news-full-link-container a {
+.news-item-expandable .news-full-link-container-summary a, /* Para o novo link */
+.news-item-expandable .news-full-link-container a { /* Para o link antigo, se ainda em uso em algum lugar */
     color: #007bff; /* Cor azul para o link "Ver notícia completa" */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
+.news-item-expandable .news-full-link-container-summary a:hover,
 .news-item-expandable .news-full-link-container a:hover {
     color: #0056b3;
     text-decoration: underline;

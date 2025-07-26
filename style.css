@@ -25,14 +25,17 @@ header p {
     font-size: 1.1em;
 }
 
+/* --- Início da Correção do Banner do Cabeçalho --- */
 .header-banner {
     max-width: 100%; /* Garante que a imagem se ajuste à largura do header */
-    height: auto;
-    display: block; /* Remove espaço extra abaixo da imagem */
-    margin: 15px auto 0 auto; /* Centraliza e adiciona margem superior */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove o espaço extra abaixo da imagem, permite centralizar com margin: auto */
+    margin: 15px auto 0 auto; /* Centraliza horizontalmente e adiciona margem superior */
     border-radius: 8px; /* Cantos arredondados, se desejar */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra suave */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra suave para destacar */
 }
+/* --- Fim da Correção do Banner do Cabeçalho --- */
+
 
 /* Estilos para o menu no desktop (padrão) */
 .main-nav {
@@ -76,11 +79,11 @@ header p {
     border-radius: 5px;
 }
 
-/* --- CORREÇÃO: Ocultar menus específicos de forma mais forte --- */
+/* --- Correção para Ocultar Menus Específicos (já aplicada) --- */
 .main-nav ul li .menu-oculto {
     display: none !important; /* !important garante que sobrescreve outras regras */
 }
-/* FIM DA CORREÇÃO */
+/* Fim da Correção para Ocultar Menus Específicos */
 
 
 main {
